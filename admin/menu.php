@@ -31,12 +31,12 @@
 
 // ---- INFORMATUX ----
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
-$path = dirname(dirname(dirname(dirname(__FILE__))));
+$path = dirname(dirname(dirname(__DIR__)));
 
 global $xoopsModule, $xoopsUser;
 
-$dirname        = basename(dirname(dirname(__FILE__)));
-$module_handler = xoops_gethandler('module');
+$dirname        = basename(dirname(__DIR__));
+$module_handler =& xoops_gethandler('module');
 $module         = $module_handler->getByDirname($dirname);
 $pathIcon32     = $module->getInfo('icons32');
 $pathLanguage   = $path . $module->getInfo('dirmoduleadmin');
@@ -49,24 +49,23 @@ include_once $fileinc;
 xoops_loadLanguage('admin', $dirname);
 // -------
 
-$i = 1;
+$i                      = 1;
 $adminmenu[$i]['title'] = _MI_LIAISE_ADMENU1;
 $adminmenu[$i]['link']  = "admin/index.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/manage.png';;
+$adminmenu[$i]['icon']  = $pathIcon32 . '/manage.png';;
 $i++;
 $adminmenu[$i]['title'] = _MI_LIAISE_ADMENU2;
 $adminmenu[$i]['link']  = "admin/forms.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/list.png';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/list.png';
 $i++;
 $adminmenu[$i]['title'] = _MI_LIAISE_ADMENU3;
 $adminmenu[$i]['link']  = "admin/editelement.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/insert_table_row.png';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/insert_table_row.png';
 $i++;
 $adminmenu[$i]['title'] = _MI_LIAISE_ADMENU4;
 $adminmenu[$i]['link']  = "admin/forms.php?op=archive_all";
-$adminmenu[$i]['icon']  = $pathIcon32.'/mail_country.png';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/mail_country.png';
 $i++;
 $adminmenu[$i]['title'] = _MI_LIAISE_ADMENU5;
 $adminmenu[$i]['link']  = "admin/about.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/about.png';;
-?>
+$adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';;

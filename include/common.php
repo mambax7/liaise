@@ -34,42 +34,39 @@
 ###############################################################################
 
 if (!defined("LIAISE_CONSTANTS_DEFINED")) {
-	define("LIAISE_URL", XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/');
-	define("LIAISE_ROOT_PATH", XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->getVar('dirname').'/');
-	define("LIAISE_UPLOAD_PATH", $xoopsModuleConfig['uploaddir'].'/');
+    define("LIAISE_URL", XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/');
+    define("LIAISE_ROOT_PATH", XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/');
+    define("LIAISE_UPLOAD_PATH", $xoopsModuleConfig['uploaddir'] . '/');
 
-	define("LIAISE_CONSTANTS_DEFINED", true);
+    define("LIAISE_CONSTANTS_DEFINED", true);
 }
 
 $liaise_form_mgr =& xoops_getmodulehandler('forms');
 
 if (false != LIAISE_UPLOAD_PATH) {
-	if (!is_dir(LIAISE_UPLOAD_PATH)) {
-		$oldumask = umask(0);
-		mkdir(LIAISE_UPLOAD_PATH, 0777);
-		umask($oldumask);
-	}
-	if (is_dir(LIAISE_UPLOAD_PATH) && !is_writable(LIAISE_UPLOAD_PATH)) {
-		chmod(LIAISE_UPLOAD_PATH, 0777);
-	}
+    if (!is_dir(LIAISE_UPLOAD_PATH)) {
+        $oldumask = umask(0);
+        mkdir(LIAISE_UPLOAD_PATH, 0777);
+        umask($oldumask);
+    }
+    if (is_dir(LIAISE_UPLOAD_PATH) && !is_writable(LIAISE_UPLOAD_PATH)) {
+        chmod(LIAISE_UPLOAD_PATH, 0777);
+    }
 }
 
 // ------------------ INFORMATUX
-function dbResultToArray($result) {
-   // construction d'un tableau pour les scripts
-   global $xoopsDB;
-   $result_array = array();
+function dbResultToArray($result)
+{
+    // construction d'un tableau pour les scripts
+    global $xoopsDB;
+    $result_array = array();
 
-   for (
-        $count = 0;
-        $myrow = $xoopsDB->fetchArray($result);
-        $count++
-       )
-     $result_array[$count] = $myrow;
+    for ($count = 0; $myrow = $xoopsDB->fetchArray($result); $count++) {
+        $result_array[$count] = $myrow;
+    }
 
-   return $result_array;
+    return $result_array;
 }
 
 //error_reporting(E_ALL);
-
-?>
+;

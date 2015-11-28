@@ -15,12 +15,12 @@
 
 <p>
     <ul>
-	<{foreach item=form from=$forms}>
-		<li class="vignette">
-			<a href="<{$smarty.const.LIAISE_URL}>index.php?form_id=<{$form.id}>">
-				<{$form.title|truncate:50:".."}>
-			</a>
-		</li>
-	<{/foreach}>
+    <{foreach item=form from=$forms}>
+        <li class="vignette">
+            <a href="<{$smarty.const.LIAISE_URL}>index.php?form_id=<{$form.id}>">
+                <{$form.title|truncate:50:".."}>
+            </a>
+        </li>
+    <{/foreach}>
     </ul>
 </p>

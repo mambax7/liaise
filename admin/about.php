@@ -38,10 +38,10 @@ include 'admin_header.php';
 adminHtmlHeader('about.php');
 
 ?>
-<!--<img src="../images/liaise.png" alt="Liaise" style="float: left; margin: 0 10px 5px 0;" />
+    <!--<img src="../images/liaise.png" alt="Liaise" style="float: left; margin: 0 10px 5px 0;" />
 <h4 style="margin: 0;">Liaise</h4>
 <p style="margin-top: 0;">
-Version <?=number_format($xoopsModule->getVar('version')/100, 2);?><br />
+Version <?= number_format($xoopsModule->getVar('version') / 100, 2); ?><br />
 Presented by <a href="http://www.brandycoke.com/" target="_blank">Brandycoke Productions</a> <br />
 Copyright &copy; 2003-2005 NS Tai (tuff)
 <br clear="all" />
@@ -63,10 +63,10 @@ This software is licensed under the CC-GNU GPL.<br />
 Liaise is Freeware and Opensource. If you think it is useful and would like to show your appreciation, you can support us in one of the following ways:
 </p>
 <ul>
-	<li><a href="https://www.paypal.com/xclick/business=donations%40brandycoke.com&amp;item_name=Donation+for+Brandycoke+Freewares&amp;item_number=liaise&amp;no_note=1&amp;tax=0&amp;currency_code=USD">Donate us via PayPal</a>
-	</li>
-	<li><a href="http://www.brandycoke.com/about/services/">Hire us for your web development projects</a>
-	</li>
+    <li><a href="https://www.paypal.com/xclick/business=donations%40brandycoke.com&amp;item_name=Donation+for+Brandycoke+Freewares&amp;item_number=liaise&amp;no_note=1&amp;tax=0&amp;currency_code=USD">Donate us via PayPal</a>
+    </li>
+    <li><a href="http://www.brandycoke.com/about/services/">Hire us for your web development projects</a>
+    </li>
 </ul>-->
 
 <?php

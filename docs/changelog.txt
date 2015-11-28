@@ -1,4 +1,16 @@
 =========================================================
+2.01 FINAL             NOT RELEASED
+=========================================================
+- fixed variable by reference (mamba)
+- added language variables (mamba)
+- PSR-2 updates (mamba)
+- changed "dirname(__FILE__)" to "__DIR__" (mamba)
+- changed "intval" to "(int)" (mamba)
+- updated missing English translation in modinfo.php (mamba)
+- replaced rand with mt_rand (mamba)
+- added more entropy for uniqid (mamba)
+
+=========================================================
 2015/11/18  2.00 FINAL
 =========================================================
 [ADMIN] Compatible avec le Framework "Module Classes" 1.1

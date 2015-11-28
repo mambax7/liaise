@@ -2,77 +2,66 @@
 // 2006-12-20 K.OHWADA
 // add captcha
 
-// $Id: modinfo.php 26 2005-09-04 09:52:40Z tuff $
+// $Id:
 
 // The name of this module
-define("_MI_LIAISE_NAME","LIAISE");
+define('_MI_LIAISE_NAME', 'LIAISE');
 
 // A brief description of this module
-define("_MI_LIAISE_DESC","Forms generator");
+define('_MI_LIAISE_DESC', 'Forms generator');
 
 // admin/menu.php
-define("_MI_LIAISE_ADMENU1","Home");
-define("_MI_LIAISE_ADMENU2","Forms");
-define("_MI_LIAISE_ADMENU3","Elements form");
-define("_MI_LIAISE_ADMENU4","All the messages");
-define("_MI_LIAISE_ADMENU5","About");
-define("_MI_LIAISE_ADMENU6","Synthesis");
+define('_MI_LIAISE_ADMENU1', 'Home');
+define('_MI_LIAISE_ADMENU2', 'Forms');
+define('_MI_LIAISE_ADMENU3', 'Elements form');
+define('_MI_LIAISE_ADMENU4', 'All the messages');
+define('_MI_LIAISE_ADMENU5', 'About');
+define('_MI_LIAISE_ADMENU6', 'Synthesis');
 
-//	preferences
-define("_MI_LIAISE_TEXT_WIDTH","Largeur par d&#233;faut des zones de texte");
-define("_MI_LIAISE_TEXT_MAX","Longueur maximale par d&#233;faut des zones de texte");
-define("_MI_LIAISE_TAREA_ROWS","Rang&#233;es de zones de texte par d&#233;fault");
-define("_MI_LIAISE_TAREA_COLS","Colonnes de zones de texte par d&#233;faut");
+//    preferences
+define('_MI_LIAISE_TEXT_WIDTH', 'Default width of text boxes');
+define('_MI_LIAISE_TEXT_MAX', 'Default maximum length of text boxes');
+define('_MI_LIAISE_TAREA_ROWS', 'Default rows of text areas');
+define('_MI_LIAISE_TAREA_COLS', 'Default columns of text areas');
 
 ######### version 1.1  additions #########
-//	preferences
-define("_MI_LIAISE_MAIL_CHARSET","Encodage du texte pour l&#39;envoi des emails");
+//    preferences
+define('_MI_LIAISE_MAIL_CHARSET', 'Text encoding for sending emails');
 
-//	template descriptions
-define("_MI_LIAISE_TMPL_MAIN_DESC",     "Page d&#39;accueil du module");
-define("_MI_LIAISE_TMPL_ERROR_DESC",    "Page &#224; afficher lorsqu&#39;une erreur est d&#233;tect&#233;e");
-define("_MI_LIAISE_TMPL_HEADER_DESC",   "Header Template File");
+//    template descriptions
+define('_MI_LIAISE_TMPL_MAIN_DESC', 'Main page of Liaise');
+define('_MI_LIAISE_TMPL_ERROR_DESC', 'Page to show when error occurs');
+define('_MI_LIAISE_TMPL_HEADER_DESC', 'Header Template File');
 
 ######### version 1.2 additions #########
-//	template descriptions
-define("_MI_LIAISE_TMPL_FORM_DESC","Template pour formulaires");
+//    template descriptions
+define('_MI_LIAISE_TMPL_FORM_DESC', 'Template for forms');
 
-//	preferences
-define("_MI_LIAISE_MOREINFO","Envoyer des informations suppl&#233;mentaires, ainsi que les donn&#233;es pr&#233;sent&#233;es");
-define("_MI_LIAISE_MOREINFO_USER","Nom d&#39;utilisateur et URL de la page d&#39;informations sur l&#39;utilisateur");
-define("_MI_LIAISE_MOREINFO_IP","Soumettre par addresse IP");
-define("_MI_LIAISE_MOREINFO_AGENT","infos navigateur");
-define("_MI_LIAISE_MOREINFO_FORM","URL du formulaire pr&#233;sent&#233;");
-define("_MI_LIAISE_MAIL_CHARSET_DESC","Laissez en blanc pour "._CHARSET);
-define("_MI_LIAISE_PREFIX","Texte de pr&#233;fixe pour des champs obligatoires");
-define("_MI_LIAISE_SUFFIX","Suffixe de texte des champs requis");
-define("_MI_LIAISE_INTRO","Texte d&#39;introduction de la page principale");
-define("_MI_LIAISE_GLOBAL","Texte &#224; afficher dans chaque page de formulaire");
+//    preferences
+define('_MI_LIAISE_MOREINFO', 'Send additional information along with the submitted data');
+define('_MI_LIAISE_MOREINFO_USER', 'User name and URL to user info page');
+define('_MI_LIAISE_MOREINFO_IP', "Submitter's IP address");
+define('_MI_LIAISE_MOREINFO_AGENT', 'Submitter\'s user agent (browser info)');
+define('_MI_LIAISE_MOREINFO_FORM', 'URL of the submitted form');
+define('_MI_LIAISE_MAIL_CHARSET_DESC', 'Leave blank for ' . _CHARSET);
+define('_MI_LIAISE_PREFIX', 'Text prefix for required fields');
+define('_MI_LIAISE_SUFFIX', 'Text suffix for required fields');
+define('_MI_LIAISE_INTRO', 'Introduction text in main page');
+define('_MI_LIAISE_GLOBAL', 'Text to be displayed in every form page');
 
 ######### version 1.21 additions #########
 // preferences default values
-define("_MI_LIAISE_INTRO_DEFAULT","N&#39;h&#233;sitez pas &#224; nous contacter par les moyens suivants:");
-define("_MI_LIAISE_GLOBAL_DEFAULT","<strong>* Requis</strong>");
+define('_MI_LIAISE_INTRO_DEFAULT', 'Feel free to contact us via the following means:');
+define('_MI_LIAISE_GLOBAL_DEFAULT', '<strong>* Required</strong>');
 
 ######### version 1.23 additions #########
-define("_MI_LIAISE_UPLOADDIR","Chemin d&#39;acc&#232;s physique pour stocker les fichiers t&#233;l&#233;charg&#233;s SANS slash");
-define("_MI_LIAISE_UPLOADDIR_DESC","tous les fichiers envoy&#233; via un message priv&#233; seront stock&#233;s dans ce dossier ");
+define('_MI_LIAISE_UPLOADDIR', 'Physical path for storing uploaded files WITHOUT trailing slash');
+define('_MI_LIAISE_UPLOADDIR_DESC', 'All upload files will be stored here when a form is sent via private message');
 
 // --- captcha ---
-define("_MI_LIAISE_CAPTCHA","Captcha: Anti-Spam");
-define("_MI_LIAISE_CAPTCHA_DESC","Cliquez sur oui, pour valider captcha");
+define('_MI_LIAISE_CAPTCHA', 'Captcha: Anti-Spam');
+define('_MI_LIAISE_CAPTCHA_DESC', "Click 'Yes' to confirm captcha");
 
 ######### version 2.0 #########
-define("_MI_LIAISE_BREADCRUMB", "Breadcrumb");
-define("_MI_LIAISE_BREADCRUMB_DESC", "View breadcrumb on the module pages");
-
-/**
- * @translation     AFUX (Association Francophone des Utilisateurs de Xoops) 
- * @specification   _LANGCODE: fr
- * @specification   _CHARSET: UTF-8
- *
- * @translator   Tatane from frxoops.org
- *
- * @version         $Id$
-**/
-?>
+define("_MI_LIAISE_BREADCRUMB", "Breadcrumb (Path)");
+define("_MI_LIAISE_BREADCRUMB_DESC", "View Breadcrumb on the pages of the module");

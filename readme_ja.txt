@@ -6,45 +6,45 @@ URL:    http://linux.ohwada.jp/
 Email:  webmaster@ohwada.jp
 =================================================
 
-Liaise 1.26 ¤Î¥Ï¥Ã¥¯ÈÇ¤Ç¤¹¡£
+Liaise 1.26 $B$N%O%C%/HG$G$9!#(B
 
-(1) ¥¹¥Ñ¥àÂÐºö¤È¤·¤Æ GIJOE's Ticket Class ¤òÆ³Æþ¤·¤¿
-¥Õ¥©¡¼¥àÅê¹Æ¤Ç¥¨¥é¡¼¤Ë¤Ê¤ë¤È¡¢¥Õ¥©¡¼¥à²èÌÌ¤òºÆÉ½¼¨¤¹¤ë
+(1) $B%9%Q%`BP:v$H$7$F(B GIJOE's Ticket Class $B$rF3F~$7$?(B
+$B%U%)!<%`Ej9F$G%(%i!<$K$J$k$H!"%U%)!<%`2hLL$r:FI=<($9$k(B
 
 - index.php
-- include/gtickets.php (ÄÉ²Ã)
+- include/gtickets.php ($BDI2C(B)
 - include/form_render.php.php
 - class/elementrenderer.php
 - tepmlates/liaise_form.php
 
-(2) ´ÉÍý¼Ô²èÌÌ¤Ë¤â GIJOE's Ticket Class ¤òÆ³Æþ¤·¤¿
+(2) $B4IM}<T2hLL$K$b(B GIJOE's Ticket Class $B$rF3F~$7$?(B
 - admin/admin_header.php
 - admin/elements.php
 - admin/editelement.php
 - admin/index.php
 
-(3) ¥¹¥Ñ¥àÂÐºö¤È¤·¤Æ ²èÁüÇ§¾Ú¤òÆ³Æþ¤·¤¿
-²èÁüÇ§¾Ú¤Î¥¯¥é¥¹¤Ë¤Ï captcha_x ¤òºÎÍÑ¤·¤¿
+(3) $B%9%Q%`BP:v$H$7$F(B $B2hA|G'>Z$rF3F~$7$?(B
+$B2hA|G'>Z$N%/%i%9$K$O(B captcha_x $B$r:NMQ$7$?(B
   http://www.phpclasses.org/browse/package/3023.html
-¥Õ¥©¥ó¥È¤Ë¤Ï Standard 35 TrueType Fonts ¤òºÎÍÑ¤·¤¿
+$B%U%)%s%H$K$O(B Standard 35 TrueType Fonts $B$r:NMQ$7$?(B
   http://www.rops.org/download/std35ttf.zip
-´ÉÍý¼Ô²èÌÌ¤è¤ê»ÈÍÑ/Ì¤»ÈÍÑ¤¬ÁªÂò¤Ç¤­¤Þ¤¹
+$B4IM}<T2hLL$h$j;HMQ(B/$BL$;HMQ$,A*Br$G$-$^$9(B
 
-- server.php (ÄÉ²Ã)
+- server.php ($BDI2C(B)
 - index.php
 - xoops_version.php
-- class/captcha_x/ (ÄÉ²Ã)
+- class/captcha_x/ ($BDI2C(B)
 - include/form_render.php.php
 - language/english/main.php
 - language/english/modinfo.php
 - language/japanese/main.php
 - language/japanese/modinfo.php
 
-(4) [ÆüËÜ¸ì] ¥á¡¼¥ë¤¬Ê¸»ú²½¤±¤¹¤ëÉÔ¶ñ¹ç¤ò½¤Àµ¤·¤¿¡£
-¡Ö¥á¡¼¥ëÁ÷¿®»þ¤Î¥¨¥ó¥³¡¼¥ÉÊýË¡¡×¤Î½é´üÃÍ¤ò EUC-JP ¤«¤é ISO-2022-JP ¤ËÊÑ¹¹¤·¤¿¡£
+(4) [$BF|K\8l(B] $B%a!<%k$,J8;z2=$1$9$kIT6q9g$r=$@5$7$?!#(B
+$B!V%a!<%kAw?.;~$N%(%s%3!<%IJ}K!!W$N=i4|CM$r(B EUC-JP $B$+$i(B ISO-2022-JP $B$KJQ99$7$?!#(B
 - xoops_version.php
 
-(5) PHP5ÂÐ±þ
+(5) PHP5$BBP1~(B
 Notice [PHP]: Only variable references should be returned by reference
 - class/elements.php
 

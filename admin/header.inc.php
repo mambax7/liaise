@@ -11,44 +11,50 @@
 /*            <http://www.xoops.org/>          */
 /* ******************************************* */
 
-function getFormsCount($form_order = false, $created = true) {
+function getFormsCount($form_order = false, $created = true)
+{
     // query database for forms created
     global $xoopsDB;
-    if ($created AND $form_order == false) {
+    if ($created && $form_order == false) {
         // Created Forms
-        $sql = 'SELECT * FROM ' . $xoopsDB->prefix('xliaise_forms');
+        $sql    = 'SELECT * FROM ' . $xoopsDB->prefix('xliaise_forms');
         $result = $xoopsDB->query($sql);
-        if (!$result)
-          return false;
+        if (!$result) {
+            return false;
+        }
         $num_forms = $xoopsDB->getRowsNum($result);
-        if ($num_forms == 0)
-           return false;
+        if ($num_forms == 0) {
+            return false;
+        }
     } else {
         // Activated Forms
-        $sql = 'SELECT * FROM ' . $xoopsDB->prefix('xliaise_forms') . ' WHERE form_order >= "1"';
+        $sql    = 'SELECT * FROM ' . $xoopsDB->prefix('xliaise_forms') . ' WHERE form_order >= "1"';
         $result = $xoopsDB->query($sql);
-        if (!$result)
-          return false;
+        if (!$result) {
+            return false;
+        }
         $num_forms = $xoopsDB->getRowsNum($result);
-        if ($num_forms == 0)
-           return false;
+        if ($num_forms == 0) {
+            return false;
+        }
     }
-    
-    return $num_forms;    
+
+    return $num_forms;
 }
 
-function getFormTitle($form_id) {
+function getFormTitle($form_id)
+{
     // query database for form title
     global $xoopsDB;
     if (isset($form_id)) {
-        $sql = 'SELECT form_title FROM '.$xoopsDB->prefix("xliaise_forms").' WHERE form_id = "'.$form_id.'"';
+        $sql    = 'SELECT form_title FROM ' . $xoopsDB->prefix("xliaise_forms") . ' WHERE form_id = "' . $form_id . '"';
         $result = $xoopsDB->query($sql);
-        if (!$result)
+        if (!$result) {
             return false;
-        else
+        } else {
             return $xoopsDB->fetchArray($result);
+        }
     } else {
         return false;
     }
 }
-?>
