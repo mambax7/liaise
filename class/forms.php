@@ -41,7 +41,7 @@ class LiaiseForms extends XoopsObject
 {
     public function __construct()
     {
-        $this->XoopsObject();
+        parent::__construct();
         //    key, data_type, value, req, max, opt
         $this->initVar("form_id", XOBJ_DTYPE_INT);
         $this->initVar("form_send_method", XOBJ_DTYPE_TXTBOX, 'e', true, 1);

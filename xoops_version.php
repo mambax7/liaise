@@ -58,8 +58,8 @@ $modversion["module_website_name"] = "Brandycoke Productions <a href='//www.info
 $modversion['release_date']        = '2015/11/18';
 $modversion["status_version"]      = "Stable";
 $modversion["module_status"]       = "FINAL";
-$modversion['min_php']             = '5.4';
-$modversion['min_xoops']           = "2.5.7.1";
+$modversion['min_php']             = '5.5';
+$modversion['min_xoops']           = "2.5.7.2";
 $modversion['min_admin']           = '1.1';
 $modversion['min_db']              = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
 

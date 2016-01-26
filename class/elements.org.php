@@ -41,7 +41,7 @@ class LiaiseElements extends XoopsObject
 {
     public function __construct()
     {
-        $this->XoopsObject();
+        parent::__construct();
         //    key, data_type, value, req, max, opt
         $this->initVar("ele_id", XOBJ_DTYPE_INT, null, false);
         $this->initVar("form_id", XOBJ_DTYPE_INT);
