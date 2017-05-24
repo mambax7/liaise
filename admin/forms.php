@@ -38,7 +38,7 @@
 ###############################################################################
 
 include 'admin_header.php';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $op   = isset($_GET['op']) ? trim($_GET['op']) : false;
 $op   = isset($_POST['op']) ? trim($_POST['op']) : $op;
 
@@ -51,7 +51,7 @@ switch ($op) {
         $criteria = new Criteria(1, 1);
         $criteria->setSort('form_order');
         $criteria->setOrder('ASC');
-        if ($forms =& $liaise_form_mgr->getObjects($criteria, 'admin_list')) {
+        if ($forms = $liaise_form_mgr->getObjects($criteria, 'admin_list')) {
             echo '<form action="' . _LIAISE_ADMIN_URL . '/forms.php" method="post">
                 <table class="outer" cellspacing="1" width="100%">
                     <tr><th colspan="5">' . _AM_FORM_LISTING . '</th></tr>
@@ -469,7 +469,7 @@ switch ($op) {
                 $criteria       = new Criteria('form_id', $clone_form_id);
                 $count          = $liaise_ele_mgr->getCount($criteria);
                 if ($count > 0) {
-                    $elements =& $liaise_ele_mgr->getObjects($criteria);
+                    $elements = $liaise_ele_mgr->getObjects($criteria);
                     foreach ($elements as $e) {
                         $cloned =& $e->xoopsClone();
                         $cloned->setVar('form_id', $ret);

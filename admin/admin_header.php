@@ -62,7 +62,7 @@ $pathModuleAdmin = $xoopsModule->getInfo('dirmoduleadmin');
 $pathIcon16      = XOOPS_URL . '/' . $moduleInfo->getInfo('icons16');
 $pathIcon32      = XOOPS_URL . '/' . $moduleInfo->getInfo('icons32');
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 // --------
 
 // --- GIJOE's Ticket Class ---

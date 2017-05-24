@@ -33,7 +33,7 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 require 'header.php';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 if (empty($_POST['submit'])) {
     $form_id = isset($_GET['form_id']) ? (int)($_GET['form_id']) : 0;
     if (empty($form_id)) {

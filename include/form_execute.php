@@ -42,7 +42,7 @@ $criteria->add(new Criteria('form_id', $form->getVar('form_id')), 'AND');
 $criteria->add(new Criteria('ele_display', 1), 'AND');
 $criteria->setSort('ele_order');
 $criteria->setOrder('ASC');
-$elements =& $liaise_ele_mgr->getObjects($criteria, true);
+$elements = $liaise_ele_mgr->getObjects($criteria, true);
 
 $msg = $err = $attachments = array();
 foreach ($_POST as $k => $v) {

@@ -97,7 +97,7 @@ if (!isset($_POST['op']) || $_POST['op'] != 'save') {
     $ticket = $xoopsGTicket->issue(__LINE__);
     // ------
 
-    if ($elements =& $liaise_ele_mgr->getObjects($criteria)) {
+    if ($elements = $liaise_ele_mgr->getObjects($criteria)) {
         foreach ($elements as $i) {
             $id        = $i->getVar('ele_id');
             $renderer  = new LiaiseElementRenderer($i);

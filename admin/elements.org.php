@@ -82,7 +82,7 @@ if (!isset($_POST['op']) || $_POST['op'] != 'save') {
     $criteria->setSort('ele_order');
     $criteria->setOrder('ASC');
 
-    if ($elements =& $liaise_ele_mgr->getObjects($criteria)) {
+    if ($elements = $liaise_ele_mgr->getObjects($criteria)) {
         foreach ($elements as $i) {
             $id        = $i->getVar('ele_id');
             $renderer  = new LiaiseElementRenderer($i);

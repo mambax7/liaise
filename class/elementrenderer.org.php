@@ -45,7 +45,7 @@ class LiaiseElementRenderer
     public function &constructElement($admin = false)
     {
         global $xoopsUser, $form;
-        $myts        =& MyTextSanitizer::getInstance();
+        $myts        = MyTextSanitizer::getInstance();
         $ele_caption = $this->_ele->getVar('ele_caption');
         $ele_value   = $this->_ele->getVar('ele_value');
         $e           = $this->_ele->getVar('ele_type');

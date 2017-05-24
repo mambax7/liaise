@@ -39,7 +39,7 @@
 // includes
 include 'admin_header.php';
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $op = isset($_GET['op']) ? trim($_GET['op']) : false;
 $op = isset($_POST['op']) ? trim($_POST['op']) : $op;

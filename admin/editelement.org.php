@@ -36,7 +36,7 @@ include("admin_header.php");
 $liaise_ele_mgr =& xoops_getmodulehandler('elements');
 include_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
 define('_THIS_PAGE', LIAISE_URL . 'admin/editelement.php');
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 if ($liaise_form_mgr->getCount() < 1) {
     redirect_header(LIAISE_ADMIN_URL, 0, _AM_GO_CREATE_FORM);
 }
@@ -136,7 +136,7 @@ switch ($op) {
 
         if ($clone == true || empty($form_id)) {
             $select_apply_form = new XoopsFormSelect(_AM_ELE_APPLY_TO_FORM, 'form_id', $form_id);
-            $forms             =& $liaise_form_mgr->getObjects(null, 'form_id, form_title');
+            $forms             = $liaise_form_mgr->getObjects(null, 'form_id, form_title');
             foreach ($forms as $f) {
                 $select_apply_form->addOption($f->getVar('form_id'), $f->getVar('form_title'));
             }

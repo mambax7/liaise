@@ -266,7 +266,7 @@ class LiaiseFormsHandler extends XoopsObjectHandler
         $criteria->add(new Criteria('form_order', 1, '>='), 'OR');
         $criteria->setSort('form_order');
         $criteria->setOrder('ASC');
-        if ($forms =& $this->getObjects($criteria, 'home_list')) {
+        if ($forms = $this->getObjects($criteria, 'home_list')) {
             $ret = array();
             foreach ($forms as $f) {
                 if (false != $moduleperm_handler->checkRight($this->perm_name, $f->getVar('form_id'), $groups, $xoopsModule->getVar('mid'))) {
