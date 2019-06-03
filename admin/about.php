@@ -1,55 +1,44 @@
 <?php
-// $Id: about.php 65 2005-11-05 03:33:38Z tuff $
-###############################################################################
-##                Liaise -- Contact forms generator for XOOPS                ##
-##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
-##                       <http://www.brandycoke.com/>                        ##
-###############################################################################
-##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000 XOOPS.org                        ##
-##                          <http://www.xoops.org/>                          ##
-###############################################################################
-##  This program is free software; you can redistribute it and/or modify     ##
-##  it under the terms of the GNU General Public License as published by     ##
-##  the Free Software Foundation; either version 2 of the License, or        ##
-##  (at your option) any later version.                                      ##
-##                                                                           ##
-##  You may not change or alter any portion of this comment or credits       ##
-##  of supporting developers from this source code or any supporting         ##
-##  source code which is considered copyrighted (c) material of the          ##
-##  original comment or credit authors.                                      ##
-##                                                                           ##
-##  This program is distributed in the hope that it will be useful,          ##
-##  but WITHOUT ANY WARRANTY; without even the implied warranty of           ##
-##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            ##
-##  GNU General Public License for more details.                             ##
-##                                                                           ##
-##  You should have received a copy of the GNU General Public License        ##
-##  along with this program; if not, write to the Free Software              ##
-##  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA ##
-###############################################################################
-##  Author of this file: NS Tai (aka tuff)                                   ##
-##  URL: http://www.brandycoke.com/                                          ##
-##  Project: Liaise                                                          ##
-###############################################################################
-include 'admin_header.php';
 
-// --- INFORMATUX --- 
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ *
+ * @copyright   2003-2005 NS Tai (aka tuff) http://www.brandycoke.com
+ * @copyright   2003-2019 XOOPS Project (https://xoops.org)
+ * @license     GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author      NS Tai (aka tuff) URL: http://www.brandycoke.com/
+ * @author      Kenichi OHWADA, http://linux2.ohwada.net/, Email:  webmaster@ohwada.jp
+ * @author      Patrice BOUTHIER, contact@informatux.com, https://informatux.com/
+ * @author      Michael Beck (aka Mamba), XOOPS Development Team
+ * @package     Liaise -- Contact forms generator for XOOPS
+ */
+require_once __DIR__ . '/admin_header.php';
+
+// --- INFORMATUX ---
 adminHtmlHeader('about.php');
 
 ?>
-<!--<img src="../images/liaise.png" alt="Liaise" style="float: left; margin: 0 10px 5px 0;" />
+<!--<img src="../images/liaise.png" alt="Liaise" style="float: left; margin: 0 10px 5px 0;">
 <h4 style="margin: 0;">Liaise</h4>
 <p style="margin-top: 0;">
-Version <?=number_format($xoopsModule->getVar('version')/100, 2);?><br />
-Presented by <a href="http://www.brandycoke.com/" target="_blank">Brandycoke Productions</a> <br />
+Version <?= number_format($xoopsModule->getVar('version') / 100, 2); ?><br>
+Presented by <a href="http://www.brandycoke.com/" target="_blank">Brandycoke Productions</a> <br>
 Copyright &copy; 2003-2005 NS Tai (tuff)
-<br clear="all" />
+<br clear="all">
 </p>
 
 <h4 style="margin: 0;">License</h4>
 <p style="margin-top: 0;">
-This software is licensed under the CC-GNU GPL.<br />
+This software is licensed under the CC-GNU GPL.<br>
 <a href="http://creativecommons.org/licenses/GPL/2.0/" target="_blank">Commons Deed</a> |
 <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank">Legal Code</a>
 </p>
@@ -63,13 +52,13 @@ This software is licensed under the CC-GNU GPL.<br />
 Liaise is Freeware and Opensource. If you think it is useful and would like to show your appreciation, you can support us in one of the following ways:
 </p>
 <ul>
-	<li><a href="https://www.paypal.com/xclick/business=donations%40brandycoke.com&amp;item_name=Donation+for+Brandycoke+Freewares&amp;item_number=liaise&amp;no_note=1&amp;tax=0&amp;currency_code=USD">Donate us via PayPal</a>
-	</li>
-	<li><a href="http://www.brandycoke.com/about/services/">Hire us for your web development projects</a>
-	</li>
+    <li><a href="https://www.paypal.com/xclick/business=donations%40brandycoke.com&amp;item_name=Donation+for+Brandycoke+Freewares&amp;item_number=liaise&amp;no_note=1&amp;tax=0&amp;currency_code=USD">Donate us via PayPal</a>
+    </li>
+    <li><a href="http://www.brandycoke.com/about/services/">Hire us for your web development projects</a>
+    </li>
 </ul>-->
 
 <?php
-include 'footer.php';
+require_once __DIR__ . '/footer.php';
 xoops_cp_footer();
 ?>

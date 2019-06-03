@@ -20,19 +20,19 @@ Enterprises.  All rights reserved.
 <--
 
 Fonts contributed by:
-	URW++ Design and Development Incorporated
-	Poppenbuetteler Bogen 29A
-	D-22399 Hamburg
-	Germany
-	tel. +49 (40) 60 60 50
-	fax +49 (40) 60 60 51 11
+    URW++ Design and Development Incorporated
+    Poppenbuetteler Bogen 29A
+    D-22399 Hamburg
+    Germany
+    tel. +49 (40) 60 60 50
+    fax +49 (40) 60 60 51 11
 for distribution under the GNU License and Aladdin Free Public License.
 
 Each of these fonts is individually covered by the license:
 for licensing purposes, they are not "part of" any larger entity.
 The following notice applies to these fonts:
 
-	Copyright URW Software, Copyright 1994 by URW.
+    Copyright URW Software, Copyright 1994 by URW.
 
 -->
 
@@ -60,43 +60,43 @@ The fonts were converted from type 1 to TrueType format using
 Fontographer version 1.0.7, with minor tweaking to the style/
 weight flags to ensure uniqueness.
 
-Font name			file name	Canonical name
----------			---------	--------------
+Font name            file name    Canonical name
+---------            ---------    --------------
 
-URWBookmanLDemiBold		URWB06		Bookman-Demi
-URWBookmanLDemiBoldItalic	URWBO8		Bookman-DemiItalic
-URWBookmanLLight		URWB05		Bookman-Light
-URWBookmanLLightItalic		URWB07		Bookman-LightItalic
-NimbusMonoL			NIMBU26		Courier
-NimbusMonoLRegularOblique	NIMBU28		Courier-Oblique
-NimbusMonoLBold			NIMBU27		Courier-Bold
-NimbusMonoLBoldOblique		NIMBU29		Courier-BoldOblique
-URWGothicLBook			URWGO1		AvantGarde-Book
-URWGothicLBookOblique		URWGO3		AvantGarde-BookOblique
-URWGothicLDemi			URWGO2		AvantGarde-Demi
-URWGothicLDemiOblique		URWGO4		AvantGarde-DemiOblique
-NimbusSansL			NIMBU14		Helvetica
-NimbusSansLRegularItalic	NIMBU16		Helvetica-Oblique
-NimbusSansLBold			NIMBU15		Helvetica-Bold
-NimbusSansLBoldItalic		NIMBU17		Helvetica-BoldOblique
-NimbusSansLCondensed		NIMBU18		Helvetica-Narrow
-NimbusSansLCondensedItalic	NIMBU20		Helvetica-Narrow-Oblique
-NimbusSansLCondensedBold	NIMBU19		Helvetica-Narrow-Bold
-NimbusSansLCondensedBoldItalic	NIMBU21		Helvetica-Narrow-BoldOblique
-URWPalladioLRoman		URWPA30		Palatino-Roman
-URWPalladioLItalic		URWPA32		Palatino-Italic
-URWPalladioLBold		URWPA31		Palatino-Bold
-URWPalladioLBoldItalic		URWPA33		Palatino-BoldItalic
-CenturySchoolbookLRoman		CENTU9		NewCenturySchlbk-Roman
-CenturySchoolbookLItalic	CENTU11		NewCenturySchlbk-Italic
-CenturySchoolbookLBold		CENTU10		NewCenturySchlbk-Bold
-CenturySchoolbookLBoldItalic	CENTU12		NewCenturySchlbk-BoldItalic
-NimbusRomanNo9L			NUMBU22		Times-Roman
-NimbusRomanNo9LRegularItalic	NIMBU24		Times-Italic
-NimbusRomanNo9LMedium		NIMBU23		Times-Bold
-NimbusRomanNo9LMediumItalic	NIMBU25		Times-BoldItalic
-StandardSymbolsL		STAND34		Symbol
-URWChanceryLMediumItalic	URWCH35		ZapfChancery-MediumItalic
-Dingbats			DINGB13		ZapfDingbats
+URWBookmanLDemiBold        URWB06        Bookman-Demi
+URWBookmanLDemiBoldItalic    URWBO8        Bookman-DemiItalic
+URWBookmanLLight        URWB05        Bookman-Light
+URWBookmanLLightItalic        URWB07        Bookman-LightItalic
+NimbusMonoL            NIMBU26        Courier
+NimbusMonoLRegularOblique    NIMBU28        Courier-Oblique
+NimbusMonoLBold            NIMBU27        Courier-Bold
+NimbusMonoLBoldOblique        NIMBU29        Courier-BoldOblique
+URWGothicLBook            URWGO1        AvantGarde-Book
+URWGothicLBookOblique        URWGO3        AvantGarde-BookOblique
+URWGothicLDemi            URWGO2        AvantGarde-Demi
+URWGothicLDemiOblique        URWGO4        AvantGarde-DemiOblique
+NimbusSansL            NIMBU14        Helvetica
+NimbusSansLRegularItalic    NIMBU16        Helvetica-Oblique
+NimbusSansLBold            NIMBU15        Helvetica-Bold
+NimbusSansLBoldItalic        NIMBU17        Helvetica-BoldOblique
+NimbusSansLCondensed        NIMBU18        Helvetica-Narrow
+NimbusSansLCondensedItalic    NIMBU20        Helvetica-Narrow-Oblique
+NimbusSansLCondensedBold    NIMBU19        Helvetica-Narrow-Bold
+NimbusSansLCondensedBoldItalic    NIMBU21        Helvetica-Narrow-BoldOblique
+URWPalladioLRoman        URWPA30        Palatino-Roman
+URWPalladioLItalic        URWPA32        Palatino-Italic
+URWPalladioLBold        URWPA31        Palatino-Bold
+URWPalladioLBoldItalic        URWPA33        Palatino-BoldItalic
+CenturySchoolbookLRoman        CENTU9        NewCenturySchlbk-Roman
+CenturySchoolbookLItalic    CENTU11        NewCenturySchlbk-Italic
+CenturySchoolbookLBold        CENTU10        NewCenturySchlbk-Bold
+CenturySchoolbookLBoldItalic    CENTU12        NewCenturySchlbk-BoldItalic
+NimbusRomanNo9L            NUMBU22        Times-Roman
+NimbusRomanNo9LRegularItalic    NIMBU24        Times-Italic
+NimbusRomanNo9LMedium        NIMBU23        Times-Bold
+NimbusRomanNo9LMediumItalic    NIMBU25        Times-BoldItalic
+StandardSymbolsL        STAND34        Symbol
+URWChanceryLMediumItalic    URWCH35        ZapfChancery-MediumItalic
+Dingbats            DINGB13        ZapfDingbats
 
 ---

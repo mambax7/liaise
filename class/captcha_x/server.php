@@ -1,9 +1,7 @@
 <?php
 /**
  * CAPTCHA image server
- * 
- */  
-require_once ( './class.captcha_x.php');
-$server = &new captcha_x ();
-$server->handle_request ();
-?>
+ */
+require_once __DIR__ . '/class.captcha_x.php';
+$server = new captcha_x();
+$server->handle_request();

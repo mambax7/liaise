@@ -1,14 +1,3 @@
-/* ******************************************* */
-/*                INFORMATUX                   */
-/*         http://www.informatux.com/          */
-/*       SOLUTIONS AND WEB DEVELOPMENT         */
-/*             Patrice BOUTHIER                */
-/*                   2015                      */
-/* ------------------------------------------- */
-/*    XOOPS - PHP Content Management System    */
-/*         Copyright (c) 2000 XOOPS.org        */
-/*            <http://www.xoops.org/>          */
-/* ******************************************* */
 
 .xliaise_admin_footer_inf2 {
     display: block;
@@ -30,8 +19,4 @@ ul.xliaise_editelement li {
     font-weight: bold;
     padding: 5px;
     text-align: center;
-}
-
-.xliaise_img_captcha:hover {
-    cursor: pointer;
 }

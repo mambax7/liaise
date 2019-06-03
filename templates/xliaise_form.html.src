@@ -8,24 +8,24 @@
 
 <{$form_output.javascript}>
 <form name="<{$form_output.name}>" id="<{$form_output.name}>" action="<{$form_output.action}>" method="<{$form_output.method}>" class="liaise" <{$form_output.extra}>>
-	<table cellspacing="1" class="outer">
-		<tr><th colspan="2"><{$form_output.title}></th></tr>
-		<{foreach item=element from=$form_output.elements}>
-		<{if $element.hidden != true}>
-		<tr>
-			<td class="head"><{if $element.caption == "" }>&nbsp;<{/if}><{if $element.required == 1}><{$form_req_prefix}><{/if}>
-			<{$element.caption}>
-			<{if $element.required == 1}><{$form_req_suffix}><{/if}>
-			</td>
-			<td class="<{cycle values="even,odd"}>"><{$element.body}></td>
-		</tr>
-		<{/if}>
-		<{/foreach}>
-	</table>
-	<{foreach item=element from=$form_output.elements}>
-	<{if $element.hidden == true}>
-		<{$element.body}>
-	<{/if}>
-	<{/foreach}>
-	<{if $form_text_global != ""}><div><{$form_text_global}></div><{/if}>
+    <table cellspacing="1" class="outer">
+        <tr><th colspan="2"><{$form_output.title}></th></tr>
+        <{foreach item=element from=$form_output.elements}>
+        <{if $element.hidden != true}>
+        <tr>
+            <td class="head"><{if $element.caption == "" }>&nbsp;<{/if}><{if $element.required == 1}><{$form_req_prefix}><{/if}>
+            <{$element.caption}>
+            <{if $element.required == 1}><{$form_req_suffix}><{/if}>
+            </td>
+            <td class="<{cycle values="even,odd"}>"><{$element.body}></td>
+        </tr>
+        <{/if}>
+        <{/foreach}>
+    </table>
+    <{foreach item=element from=$form_output.elements}>
+    <{if $element.hidden == true}>
+        <{$element.body}>
+    <{/if}>
+    <{/foreach}>
+    <{if $form_text_global != ""}><div><{$form_text_global}></div><{/if}>
 </form>

@@ -1,7 +1,20 @@
+<h5>2.10 Beta 1   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.10, PHP 7.3.6
+<hr>
+- namespaces (mamba)
+- class autoloading (mamba)
+WORK IN PROGRESS
+
 =========================================================
-2017/03/22  2.00 FINAL
+2.01 Beta 1             NOT RELEASED
 =========================================================
-[ADMIN] Reference for XOOPS 2.5.8
+- fixed variable by reference (mamba)
+- added language variables (mamba)
+- PSR-2 updates (mamba)
+- changed "__DIR__" to "__DIR__" (mamba)
+- changed "intval" to "(int)" (mamba)
+- updated missing English translation in modinfo.php (mamba)
+- replaced rand with mt_rand (mamba)
+- added more entropy for uniqid (mamba)
 
 =========================================================
 2015/11/18  2.00 FINAL
@@ -17,7 +30,7 @@
 [ADMIN] Nombreuses corrections bugs (ex: mauvaises soumissions de certains formulaires)
 [ADMIN] Titre des formulaires dans les tableaux
 [ADMIN] Modification de l'architecture des dossiers suivant le nouveau modele XOOPS
-[ADMIN] Passage en version 2.00 (c'est plus sympa comme chiffre ;-) ) 
+[ADMIN] Passage en version 2.00 (c'est plus sympa comme chiffre ;-) )
 [CLIENT] Ajout du nouvel element (BREAK ou SEPARATEUR)
 
 LIAISE disponible sur le GITHUB : https://github.com/informatux45/xliaise
@@ -66,7 +79,7 @@ admin can choice use or not use in admin page
 changed charset EUC-JP to ISO-2022-JP
 - xoops_version.php
 
-(5) support PHP7
+(5) support PHP5
 ----------------
 Notice [PHP]: Only variable references should be returned by reference
 - class/elements.php
