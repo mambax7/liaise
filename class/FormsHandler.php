@@ -52,7 +52,6 @@ if (!defined('LIAISE_ROOT_PATH')) {
  */
 class FormsHandler extends XoopsObjectHandler
 {
-    public $db;
     public $db_table;
     public $perm_name = 'liaise_form_access';
     public $obj_class = Forms::class;
