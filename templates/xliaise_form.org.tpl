@@ -9,7 +9,7 @@
             <th colspan="2"><{$form_output.title}></th>
         </tr>
         <{foreach item=element from=$form_output.elements}>
-            <{if $element.hidden != true}>
+            <{if $element.hidden !== true}>
                 <tr>
                     <td class="head"><{if $element.caption == "" }>&nbsp;<{/if}><{if $element.required == 1}><{$form_req_prefix}><{/if}>
                         <{$element.caption}>
@@ -21,7 +21,7 @@
         <{/foreach}>
     </table>
     <{foreach item=element from=$form_output.elements}>
-        <{if $element.hidden == true}>
+        <{if $element.hidden === true}>
             <{$element.body}>
         <{/if}>
     <{/foreach}>

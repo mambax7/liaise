@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -35,7 +35,7 @@ $modversion['description'] = _MI_LIAISE_DESC;
 $modversion['author']      = 'NS Tai (aka tuff)';
 $modversion['credits']     = "<a href='http://www.brandycoke.com/' target='_blank'>Brandycoke Productions</a>";
 $modversion['help']        = '';
-$modversion['license']     = "<a href='http://creativecommons.org/licenses/GPL/2.0/' target='_blank'>Human-Readable Commons Deed</a><br><a href='http://www.gnu.org/copyleft/gpl.html' target='_blank'>Full Legal Code</a>";
+$modversion['license']     = "<a href='http://creativecommons.org/licenses/GPL/2.0/' target='_blank'>Human-Readable Commons Deed</a><br><a href='https://www.gnu.org/copyleft/gpl.html' target='_blank'>Full Legal Code</a>";
 $modversion['official']    = 0;
 $modversion['image']       = 'images/liaise.png';
 $modversion['dirname']     = basename(__DIR__);
@@ -60,11 +60,11 @@ $modversion['hasMain'] = 1;
 $modversion['onInstall'] = 'include/functions.php';
 
 // Templates
-$modversion['templates'][1]['file']        = 'liaise_index.html';
+$modversion['templates'][1]['file']        = 'liaise_index.tpl';
 $modversion['templates'][1]['description'] = _MI_LIAISE_TMPL_MAIN_DESC;
-$modversion['templates'][2]['file']        = 'liaise_form.html';
+$modversion['templates'][2]['file']        = 'liaise_form.tpl';
 $modversion['templates'][2]['description'] = _MI_LIAISE_TMPL_FORM_DESC;
-$modversion['templates'][3]['file']        = 'liaise_error.html';
+$modversion['templates'][3]['file']        = 'liaise_error.tpl';
 $modversion['templates'][3]['description'] = _MI_LIAISE_TMPL_ERROR_DESC;
 
 //    Module Configs
@@ -111,7 +111,7 @@ $modversion['config'][5]['options']     = [
     _MI_LIAISE_MOREINFO_USER  => 'user',
     _MI_LIAISE_MOREINFO_IP    => 'ip',
     _MI_LIAISE_MOREINFO_AGENT => 'agent',
-    _MI_LIAISE_MOREINFO_FORM  => 'form'
+    _MI_LIAISE_MOREINFO_FORM  => 'form',
 ];
 
 // $helper->getConfig('mail_charset')

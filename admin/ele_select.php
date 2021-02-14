@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                    XOOPS - PHP Content Management System                  ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -32,6 +32,9 @@
 ##  URL: http://www.brandycoke.com/                                          ##
 ##  Project: Liaise                                                          ##
 ###############################################################################
+
+use XoopsModules\Liaise;
+
 if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
@@ -49,15 +52,15 @@ $opt_count = 0;
 if (empty($addopt) && !empty($ele_id)) {
     $keys = array_keys($ele_value[2]);
     for ($i = 0, $iMax = count($keys); $i < $iMax; ++$i) {
-        $v         = $myts->htmlSpecialChars($myts->stripSlashesGPC($keys[$i]));
+        $v         = htmlspecialchars(($keys[$i]));
         $options[] = addOption('ele_value[2][' . $opt_count . ']', 'checked[' . $opt_count . ']', $v, 'check', $ele_value[2][$keys[$i]]);
         $opt_count++;
     }
 } else {
     if (!empty($ele_value[2])) {
-//        while ($v = each($ele_value[2])) {
+        //        while ($v = each($ele_value[2])) {
         foreach ($ele_value[2] as $v) {
-            $v['value'] = $myts->htmlSpecialChars($myts->stripSlashesGPC($v['value']));
+            $v['value'] = htmlspecialchars(($v['value']));
             if (!empty($v['value'])) {
                 $options[] = addOption('ele_value[2][' . $opt_count . ']', 'checked[' . $opt_count . ']', $v['value'], 'check', $checked[$v['key']]);
                 $opt_count++;
@@ -65,7 +68,7 @@ if (empty($addopt) && !empty($ele_id)) {
         }
     }
     $addopt = empty($addopt) ? 2 : $addopt;
-    for ($i = 0; $i < $addopt; $i++) {
+    for ($i = 0; $i < $addopt; ++$i) {
         $options[] = addOption('ele_value[2][' . $opt_count . ']', 'checked[' . $opt_count . ']');
         $opt_count++;
     }

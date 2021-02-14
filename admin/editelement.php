@@ -2,14 +2,13 @@
 // 2006-12-20 K.OHWADA
 // use GIJOE's Ticket Class
 
-//
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -36,22 +35,25 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
+use Xmf\Request;
 use XoopsModules\Liaise;
 
 // Includes
-include __DIR__ . '/admin_header.php';
-$liaise_ele_mgr = xoops_getModuleHandler('elements');
-
-if (is_file(LIAISE_ROOT_PATH . 'class/elementrenderer.php')) {
-    require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
-}
-
-define('_THIS_PAGE', LIAISE_URL . 'admin/editelement.php');
+require_once __DIR__ . '/admin_header.php';
 
 /** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
+
+$liaise_ele_mgr = $helper->getHandler('Elements');
+
+//if (is_file(LIAISE_ROOT_PATH . 'class/elementrenderer.php')) {
+//    require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
+//}
+
+define('_THIS_PAGE', LIAISE_URL . 'admin/editelement.php');
+
 $myts = \MyTextSanitizer::getInstance();
-if ($liaise_form_mgr->getCount() < 1) {
+if ($formsHandler->getCount() < 1) {
     redirect_header(LIAISE_ADMIN_URL, 0, _AM_GO_CREATE_FORM);
 }
 
@@ -63,12 +65,12 @@ if (count($_POST) > 0) {
 
 $op      = isset($_GET['op']) ? trim($_GET['op']) : '';
 $op      = isset($_POST['op']) ? trim($_POST['op']) : $op;
-$clone   = \Xmf\Request::getInt('clone', 0, 'GET');
+$clone   = Request::getInt('clone', 0, 'GET');
 $clone   = isset($_POST['clone']) ? trim($_POST['clone']) : $clone;
-$form_id = \Xmf\Request::getInt('form_id', 0, 'GET');
+$form_id = Request::getInt('form_id', 0, 'GET');
 $form_id = isset($_POST['form_id']) ? trim($_POST['form_id']) : $form_id;
 
-if (isset($_POST['submit']) && _AM_ELE_ADD_OPT_SUBMIT == $_POST['submit'] && \Xmf\Request::getInt('addopt', 0, 'POST') > 0) {
+if (Request::hasVar('submit', 'POST') && _AM_ELE_ADD_OPT_SUBMIT == $_POST['submit'] && Request::getInt('addopt', 0, 'POST') > 0) {
     $op = 'edit';
 }
 
@@ -102,11 +104,11 @@ switch ($op) {
             $display          = $element->getVar('ele_display');
             $order            = $element->getVar('ele_order');
         } else {
-            $ele_caption      = $myts->htmlSpecialChars($myts->stripSlashesGPC($ele_caption));
+            $ele_caption      = htmlspecialchars(($ele_caption));
             $text_ele_caption = new \XoopsFormText(_AM_ELE_CAPTION, 'ele_caption', 50, 255, $ele_caption);
             $req              = isset($_POST['ele_req']) ? 1 : 0;
             $display          = isset($_POST['ele_display']) ? 1 : 0;
-            $order            = \Xmf\Request::getInt('ele_order', 0, 'POST');
+            $order            = Request::getInt('ele_order', 0, 'POST');
         }
         $output->addElement($text_ele_caption);
 
@@ -124,35 +126,35 @@ switch ($op) {
         switch ($ele_type) {
             case 'text':
             default:
-                include __DIR__ . '/ele_text.php';
+                require_once __DIR__ . '/ele_text.php';
                 break;
             case 'textarea':
-                include __DIR__ . '/ele_tarea.php';
+                require_once __DIR__ . '/ele_tarea.php';
                 break;
             case 'select':
-                include __DIR__ . '/ele_select.php';
+                require_once __DIR__ . '/ele_select.php';
                 break;
             case 'checkbox':
-                include __DIR__ . '/ele_check.php';
+                require_once __DIR__ . '/ele_check.php';
                 break;
             case 'radio':
-                include __DIR__ . '/ele_radio.php';
+                require_once __DIR__ . '/ele_radio.php';
                 break;
             case 'yn':
-                include __DIR__ . '/ele_yn.php';
+                require_once __DIR__ . '/ele_yn.php';
                 break;
             case 'html':
                 $check_ele_req->setExtra('disabled="disabled"');
-                include __DIR__ . '/ele_html.php';
+                require_once __DIR__ . '/ele_html.php';
                 break;
             case 'uploadimg':
-                include __DIR__ . '/ele_uploadimg.php';
+                require_once __DIR__ . '/ele_uploadimg.php';
                 break;
             case 'upload':
-                include __DIR__ . '/ele_upload.php';
+                require_once __DIR__ . '/ele_upload.php';
                 break;
             case 'break':
-                include __DIR__ . '/ele_break.php';
+                require_once __DIR__ . '/ele_break.php';
                 break;
         }
 
@@ -163,7 +165,7 @@ switch ($op) {
 
         if (true === $clone || empty($form_id)) {
             $select_apply_form = new \XoopsFormSelect(_AM_ELE_APPLY_TO_FORM, 'form_id', $form_id);
-            $forms             = $liaise_form_mgr->getObjects(null, 'form_id, form_title');
+            $forms             = $formsHandler->getObjects(null, 'form_id, form_title');
             foreach ($forms as $f) {
                 $select_apply_form->addOption($f->getVar('form_id'), $f->getVar('form_title'));
             }
@@ -200,7 +202,6 @@ switch ($op) {
             redirect_header(_LIAISE_ADMIN_URL, 0, _AM_NOTHING_SELECTED);
         }
         if (empty($_POST['ok'])) {
-
             // --- GIJOE's Ticket Class ---
             if (!$GLOBALS['xoopsSecurity']->check(false)) {
                 $err = 'Ticket Error <br>';
@@ -214,16 +215,19 @@ switch ($op) {
             // --- GIJOE's Ticket Class ---
             //            xoops_confirm(array('op' => 'delete', 'ele_id' => $ele_id, 'form_id' => $form_id, 'ok' => 1), _THIS_PAGE, _AM_ELE_CONFIRM_DELETE);
             $ticket = $GLOBALS['xoopsSecurity']->createToken();
-            xoops_confirm([
-                              'op'             => 'delete',
-                              'ele_id'         => $ele_id,
-                              'form_id'        => $form_id,
-                              'ok'             => 1,
-                              'XOOPS_G_TICKET' => $ticket
-                          ], _THIS_PAGE, _AM_ELE_CONFIRM_DELETE);
-        // ------
+            xoops_confirm(
+                [
+                    'op'             => 'delete',
+                    'ele_id'         => $ele_id,
+                    'form_id'        => $form_id,
+                    'ok'             => 1,
+                    'XOOPS_G_TICKET' => $ticket,
+                ],
+                _THIS_PAGE,
+                _AM_ELE_CONFIRM_DELETE
+            );
+            // ------
         } else {
-
             // --- GIJOE's Ticket Class ---
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 $err = 'Ticket Error <br>';
@@ -232,7 +236,7 @@ switch ($op) {
             }
             // ------
 
-            $element =& $liaise_ele_mgr->get($ele_id);
+            $element = $liaise_ele_mgr->get($ele_id);
             $liaise_ele_mgr->delete($element);
             redirect_header(_LIAISE_ADMIN_URL . 'elements.php?form_id=' . $form_id, 0, _AM_DBUPDATED);
         }
@@ -286,22 +290,22 @@ switch ($op) {
                 $value[1]   = !empty($ele_value[1]) ? 1 : 0;
                 $v2         = [];
                 $multi_flag = 1;
-//                while ($v = each($ele_value[2])) {
-                    foreach ($ele_value[2] as $v) {
-                        if (!empty($v['value'])) {
-                            if (1 == $value[1] || $multi_flag) {
-                                if (1 == $checked[$v['key']]) {
-                                    $check      = 1;
-                                    $multi_flag = 0;
-                                } else {
-                                    $check = 0;
-                                }
+                //                while ($v = each($ele_value[2])) {
+                foreach ($ele_value[2] as $v) {
+                    if (!empty($v['value'])) {
+                        if (1 == $value[1] || $multi_flag) {
+                            if (1 == $checked[$v['key']]) {
+                                $check      = 1;
+                                $multi_flag = 0;
                             } else {
                                 $check = 0;
                             }
-                            $v2[$v['value']] = $check;
+                        } else {
+                            $check = 0;
                         }
+                        $v2[$v['value']] = $check;
                     }
+                }
                 $value[2] = $v2;
                 break;
             case 'checkbox':
@@ -380,7 +384,7 @@ switch ($op) {
         adminHtmlFooter();
         break;
 }
-include __DIR__ . '/footer.php';
+require_once __DIR__ . '/footer.php';
 xoops_cp_footer();
 
 function addOption($id1, $id2, $text = '', $type = 'check', $checked = null)
@@ -404,7 +408,7 @@ function addOptionsTray()
 {
     $t = new \XoopsFormText('', 'addopt', 3, 2);
     $l = new \XoopsFormLabel('', sprintf(_AM_ELE_ADD_OPT, $t->render()));
-    $b = new \XoopsFormButton('', 'submit', _AM_ELE_ADD_OPT_SUBMIT, 'submit');
+    $b = new \XoopsFormButton('', 'submit', _SUBMIT, 'submit');
     $r = new \XoopsFormElementTray('');
     $r->addElement($l);
     $r->addElement($b);

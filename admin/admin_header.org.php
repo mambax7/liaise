@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -35,8 +35,8 @@
 
 use XoopsModules\Liaise;
 
-include  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include  dirname(__DIR__) . '/include/common.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(__DIR__) . '/include/common.php';
 define('LIAISE_ADMIN_URL', LIAISE_URL . 'admin/index.php');
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 function adminHtmlHeader()
@@ -47,13 +47,13 @@ function adminHtmlHeader()
     $helper = Liaise\Helper::getInstance();
     $helper->loadLanguage('modinfo');
 
-    include __DIR__ . '/menu.php';
-    for ($i = 0; $i < 3; $i++) {
+    require_once __DIR__ . '/menu.php';
+    for ($i = 0; $i < 3; ++$i) {
         $links[$i] = [0 => LIAISE_URL . $adminmenu[$i]['link'], 1 => $adminmenu[$i]['title']];
     }
     $links[]     = [
         0 => XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $xoopsModule->getVar('mid'),
-        1 => _PREFERENCES
+        1 => _PREFERENCES,
     ];
     $links[]     = [0 => LIAISE_URL . 'admin/about.php', 1 => 'About'];
     $admin_links = '<table class="outer" width="100%" cellspacing="1"><tr>';

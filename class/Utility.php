@@ -1,19 +1,15 @@
-<?php namespace XoopsModules\Liaise;
+<?php
 
-use Xmf\Request;
+namespace XoopsModules\Liaise;
+
 use XoopsModules\Liaise;
 use XoopsModules\Liaise\Common;
+use XoopsModules\Liaise\Constants;
 
 /**
  * Class Utility
  */
-class Utility
+class Utility extends Common\SysUtility
 {
-    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
-
-    use Common\ServerStats; // getServerStats Trait
-
-    use Common\FilesManagement; // Files Management Trait
-
     //--------------- Custom module methods -----------------------------
 }

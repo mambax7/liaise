@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -33,21 +33,23 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
-use XoopsModules\Liaise;
+use XoopsModules\Liaise\{
+    Helper
+};
 
-
-/** @var Liaise\Helper $helper */
-$helper = Liaise\Helper::getInstance();
+/** @var Helper $helper */
+$helper = Helper::getInstance();
+$dirname = $helper->getDirname();
 
 if (!defined('LIAISE_CONSTANTS_DEFINED')) {
-    define('LIAISE_URL', XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/');
-    define('LIAISE_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/');
+    define('LIAISE_URL', XOOPS_URL . '/modules/' . $dirname . '/');
+    define('LIAISE_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . $dirname . '/');
     define('LIAISE_UPLOAD_PATH', $helper->getConfig('uploaddir') . '/');
 
     define('LIAISE_CONSTANTS_DEFINED', true);
 }
 
-$liaise_form_mgr = xoops_getModuleHandler('forms');
+$formsHandler = $helper->getHandler('Forms');
 
 if (false !== LIAISE_UPLOAD_PATH) {
     if (!is_dir(LIAISE_UPLOAD_PATH)) {

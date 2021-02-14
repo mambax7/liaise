@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -51,7 +51,7 @@ $defaults[0]['type']    = 'text';
 $defaults[0]['value']   = [
     0 => $helper->getConfig('t_width'),
     1 => $helper->getConfig('t_max'),
-    2 => '{UNAME}'
+    2 => '{UNAME}',
 ];
 
 $defaults[1]['caption'] = 'Email address';
@@ -62,7 +62,7 @@ $defaults[1]['type']    = 'text';
 $defaults[1]['value']   = [
     0 => $helper->getConfig('t_width'),
     1 => $helper->getConfig('t_max'),
-    2 => '{EMAIL}'
+    2 => '{EMAIL}',
 ];
 
 $defaults[2]['caption'] = 'Your comments';
@@ -73,5 +73,5 @@ $defaults[2]['type']    = 'textarea';
 $defaults[2]['value']   = [
     0 => '',
     1 => $helper->getConfig('ta_rows'),
-    2 => $helper->getConfig('ta_cols')
+    2 => $helper->getConfig('ta_cols'),
 ];

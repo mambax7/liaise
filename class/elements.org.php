@@ -1,12 +1,14 @@
 <?php
-//
+
+//namespace XoopsModules\Liaise;
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -33,34 +35,34 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
-if (!defined('LIAISE_ROOT_PATH')) {
+if (!\defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
-class LiaiseElements extends \XoopsObject
+class Elements extends \XoopsObject
 {
     public function __construct()
     {
         parent::__construct();
         //    key, data_type, value, req, max, opt
-        $this->initVar('ele_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('form_id', XOBJ_DTYPE_INT);
-        $this->initVar('ele_type', XOBJ_DTYPE_TXTBOX, null, true, 10);
-        $this->initVar('ele_caption', XOBJ_DTYPE_TXTBOX, '', false, 255);
-        $this->initVar('ele_order', XOBJ_DTYPE_INT, 0);
-        $this->initVar('ele_req', XOBJ_DTYPE_INT);
-        $this->initVar('ele_value', XOBJ_DTYPE_ARRAY, '');
-        $this->initVar('ele_display', XOBJ_DTYPE_INT);
+        $this->initVar('ele_id', \XOBJ_DTYPE_INT, null, false);
+        $this->initVar('form_id', \XOBJ_DTYPE_INT);
+        $this->initVar('ele_type', \XOBJ_DTYPE_TXTBOX, null, true, 10);
+        $this->initVar('ele_caption', \XOBJ_DTYPE_TXTBOX, '', false, 255);
+        $this->initVar('ele_order', \XOBJ_DTYPE_INT, 0);
+        $this->initVar('ele_req', \XOBJ_DTYPE_INT);
+        $this->initVar('ele_value', \XOBJ_DTYPE_ARRAY, '');
+        $this->initVar('ele_display', \XOBJ_DTYPE_INT);
     }
 }
 
-class LiaiseElementsHandler
+class ElementsHandler
 {
     private $db;
     private $db_table;
-    private $obj_class = 'LiaiseElements';
+    private $obj_class = 'Elements';
 
-    public function __construct($db)
+    public function __construct(\XoopsDatabase $db)
     {
         $this->db       = $db;
         $this->db_table = $this->db->prefix('liaise_formelements');
@@ -70,7 +72,7 @@ class LiaiseElementsHandler
     {
         static $instance;
         if (null === $instance) {
-            $instance = new static($db);
+            $instance = new self($db);
         }
 
         return $instance;
@@ -83,7 +85,7 @@ class LiaiseElementsHandler
         return $ret;
     }
 
-    public function &get($id)
+    public function get($id)
     {
         $id = (int)$id;
         if ($id > 0) {
@@ -105,7 +107,7 @@ class LiaiseElementsHandler
 
     public function insert(\XoopsObject $element, $force = false)
     {
-        if (strtolower(get_class($element)) != strtolower($this->obj_class)) {
+        if (mb_strtolower(\get_class($element)) != mb_strtolower($this->obj_class)) {
             return false;
         }
         if (!$element->isDirty()) {
@@ -119,13 +121,25 @@ class LiaiseElementsHandler
         }
         if ($element->isNew() || empty($ele_id)) {
             $ele_id = $this->db->genId($this->db_table . '_ele_id_seq');
-            $sql    = sprintf('INSERT INTO `%s` (
+            $sql    = \sprintf(
+                'INSERT INTO `%s` (
                 ele_id, form_id, ele_type, ele_caption, ele_order, ele_req, ele_value, ele_display
                 ) VALUES (
                 %u, %u, %s, %s, %u, %u, %s, %u
-                )', $this->db_table, $ele_id, $form_id, $this->db->quoteString($ele_type), $this->db->quoteString($ele_caption), $ele_order, $ele_req, $this->db->quoteString($ele_value), $ele_display);
+                )',
+                $this->db_table,
+                $ele_id,
+                $form_id,
+                $this->db->quoteString($ele_type),
+                $this->db->quoteString($ele_caption),
+                $ele_order,
+                $ele_req,
+                $this->db->quoteString($ele_value),
+                $ele_display
+            );
         } else {
-            $sql = sprintf('UPDATE `%s` SET
+            $sql = \sprintf(
+                'UPDATE `%s` SET
                 form_id = %u,
                 ele_type = %s,
                 ele_caption = %s,
@@ -133,7 +147,17 @@ class LiaiseElementsHandler
                 ele_req = %u,
                 ele_value = %s,
                 ele_display = %u
-                WHERE ele_id = %u', $this->db_table, $form_id, $this->db->quoteString($ele_type), $this->db->quoteString($ele_caption), $ele_order, $ele_req, $this->db->quoteString($ele_value), $ele_display, $ele_id);
+                WHERE ele_id = %u',
+                $this->db_table,
+                $form_id,
+                $this->db->quoteString($ele_type),
+                $this->db->quoteString($ele_caption),
+                $ele_order,
+                $ele_req,
+                $this->db->quoteString($ele_value),
+                $ele_display,
+                $ele_id
+            );
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -155,7 +179,7 @@ class LiaiseElementsHandler
 
     public function delete($element, $force = false)
     {
-        if (strtolower(get_class($element)) != strtolower($this->obj_class)) {
+        if (mb_strtolower(\get_class($element)) != mb_strtolower($this->obj_class)) {
             return false;
         }
         $sql = 'DELETE FROM ' . $this->db_table . ' WHERE ele_id=' . $element->getVar('ele_id') . '';
@@ -168,12 +192,12 @@ class LiaiseElementsHandler
         return true;
     }
 
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db_table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (\is_object($criteria) && is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -189,27 +213,27 @@ class LiaiseElementsHandler
             $elements = new $this->obj_class();
             $elements->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $elements;
+                $ret[] = &$elements;
             } else {
-                $ret[$myrow['ele_id']] =& $elements;
+                $ret[$myrow['ele_id']] = &$elements;
             }
             unset($elements);
         }
 
-        return count($ret) > 0 ? $ret : false;
+        return \count($ret) > 0 ? $ret : false;
     }
 
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db_table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (\is_object($criteria) && is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
-        list($count) = $this->db->fetchRow($result);
+        [$count] = $this->db->fetchRow($result);
 
         return $count;
     }
@@ -217,7 +241,7 @@ class LiaiseElementsHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db_table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (\is_object($criteria) && is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -230,8 +254,8 @@ class LiaiseElementsHandler
     public function insertDefaults($form_id)
     {
         global $xoopsModuleConfig;
-        include LIAISE_ROOT_PATH . 'admin/default_elements.php';
-        if (count($defaults) > 0) {
+        require \LIAISE_ROOT_PATH . 'admin/default_elements.php';
+        if (\count($defaults) > 0) {
             $error = '';
             foreach ($defaults as $d) {
                 $ele = $this->create();

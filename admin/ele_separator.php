@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                    XOOPS - PHP Content Management System                  ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -32,6 +32,9 @@
 ##  URL: http://www.brandycoke.com/                                          ##
 ##  Project: Liaise                                                          ##
 ###############################################################################
+
+use XoopsModules\Liaise;
+
 if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
@@ -42,14 +45,14 @@ $opt_count = 0;
 //    $keys = array_keys($value);
 //    for( $i=0; $i<count($keys); $i++ ){
 //        $r = $value[$keys[$i]] ? $opt_count : null;
-//        $v = $myts->htmlSpecialChars($myts->stripSlashesGPC($keys[$i]));
+//        $v = htmlspecialchars(($keys[$i]));
 //        $options[] = addOption('ele_value['.$opt_count.']', $opt_count, $v, 'radio', $r);
 //        $opt_count++;
 //    }
 //}else{
 //    if( isset($ele_value) && count($ele_value) > 0 ){
 //        while( $v = each($ele_value) ){
-//            $v['value'] = $myts->htmlSpecialChars($myts->stripSlashesGPC($v['value']));
+//            $v['value'] = htmlspecialchars(($v['value']));
 //            if( !empty($v['value']) ){
 //                $r = ($checked == $opt_count) ? $opt_count : null;
 //                $options[] = addOption('ele_value['.$opt_count.']', $opt_count, $v['value'], 'radio', $r);

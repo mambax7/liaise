@@ -2,8 +2,6 @@
 // 2006-12-20 K.OHWADA
 // add captcha
 
-//
-
 // The name of this module
 define('_MI_LIAISE_NAME', 'LIAISE');
 

@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -33,6 +33,7 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
+use Xmf\Request;
 use XoopsModules\Liaise;
 
 if (!defined('LIAISE_ROOT_PATH')) {
@@ -42,7 +43,7 @@ if (!defined('LIAISE_ROOT_PATH')) {
 /** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 
-$liaise_ele_mgr = xoops_getModuleHandler('elements');
+$liaise_ele_mgr = $helper->getHandler('Elements');
 $criteria       = new \CriteriaCompo();
 $criteria->add(new \Criteria('form_id', $form->getVar('form_id')), 'AND');
 $criteria->add(new \Criteria('ele_display', 1), 'AND');
@@ -57,7 +58,7 @@ foreach ($_POST as $k => $v) {
         $ele[$n[1]] = $v;
     }
 }
-if (isset($_POST['xoops_upload_file']) && is_array($_POST['xoops_upload_file'])) {
+if (Request::hasVar('xoops_upload_file', 'POST') && is_array($_POST['xoops_upload_file'])) {
     foreach ($_POST['xoops_upload_file'] as $k => $v) {
         $n          = explode('_', $v);
         $ele[$n[1]] = $v;
@@ -72,20 +73,20 @@ foreach ($elements as $i) {
     $ele_caption = $i->getVar('ele_caption', 'n');
     if (isset($ele[$ele_id]) && !empty($ele[$ele_id])) {
         if ('' != $ele_caption) {
-            $msg[$ele_id] = "\n" . $myts->stripSlashesGPC($ele_caption) . "\n";
+            $msg[$ele_id] = "\n" . ($ele_caption) . "\n";
         }
         switch ($ele_type) {
             case 'upload':
             case 'uploadimg':
                 if (isset($_FILES['ele_' . $ele_id])) {
-                    require_once LIAISE_ROOT_PATH . 'class/uploader.php';
+                    //                    require_once LIAISE_ROOT_PATH . 'class/uploader.php';
                     $ext  = empty($ele_value[1]) ? 0 : explode('|', $ele_value[1]);
                     $mime = empty($ele_value[2]) ? 0 : explode('|', $ele_value[2]);
 
                     if ('uploadimg' === $ele_type) {
-                        $uploader[$ele_id] = new LiaiseMediaUploader(LIAISE_UPLOAD_PATH, $ele_value[0], $ext, $mime, $ele_value[4], $ele_value[5]);
+                        $uploader[$ele_id] = new Liaise\Uploader(LIAISE_UPLOAD_PATH, $ele_value[0], $ext, $mime, $ele_value[4], $ele_value[5]);
                     } else {
-                        $uploader[$ele_id] = new LiaiseMediaUploader(LIAISE_UPLOAD_PATH, $ele_value[0], $ext, $mime);
+                        $uploader[$ele_id] = new Liaise\Uploader(LIAISE_UPLOAD_PATH, $ele_value[0], $ext, $mime);
                     }
                     if (0 == $ele_value[0]) {
                         $uploader[$ele_id]->noAdminSizeCheck(true);
@@ -95,7 +96,7 @@ foreach ($elements as $i) {
                             'id'     => $ele_id,
                             'path'   => $_FILES['ele_' . $ele_id]['tmp_name'],
                             'name'   => $_FILES['ele_' . $ele_id]['name'],
-                            'saveto' => $ele_value[3]
+                            'saveto' => $ele_value[3],
                         ];
                     } else {
                         if (count($uploader[$ele_id]->errors) > 0) {
@@ -116,69 +117,69 @@ foreach ($elements as $i) {
                 if (preg_match('/\{UNAME\}/', $ele_value[2])) {
                     $reply_name = $ele[$ele_id];
                 }
-                $msg[$ele_id] .= $myts->stripSlashesGPC($ele[$ele_id]);
+                $msg[$ele_id] .= ($ele[$ele_id]);
                 break;
             case 'textarea':
-                $msg[$ele_id] .= $myts->stripSlashesGPC($ele[$ele_id]);
+                $msg[$ele_id] .= ($ele[$ele_id]);
                 break;
             case 'radio':
                 $opt_count = 1;
-//                while ($v = each($ele_value)) {
-                    foreach ($ele_value as $v) {
-                        if ($opt_count == $ele[$ele_id]) {
-                            $other = checkOther($v['key'], $ele_id, $ele_caption);
-                            if (false !== $other) {
-                                $msg[$ele_id] .= $other;
-                            } else {
-                                $msg[$ele_id] .= $myts->stripSlashesGPC($v['key']);
-                            }
+                //                while ($v = each($ele_value)) {
+                foreach ($ele_value as $v) {
+                    if ($opt_count == $ele[$ele_id]) {
+                        $other = checkOther($v['key'], $ele_id, $ele_caption);
+                        if (false !== $other) {
+                            $msg[$ele_id] .= $other;
+                        } else {
+                            $msg[$ele_id] .= ($v['key']);
                         }
-                        $opt_count++;
                     }
+                    $opt_count++;
+                }
                 break;
             case 'yn':
                 $v            = (2 == $ele[$ele_id]) ? _NO : _YES;
-                $msg[$ele_id] .= $myts->stripSlashesGPC($v);
+                $msg[$ele_id] .= ($v);
                 break;
             case 'checkbox':
                 $opt_count = 1;
                 $ch        = [];
-//                while ($v = each($ele_value)) {
-                    foreach ($ele_value as $v) {
-                        if (is_array($ele[$ele_id])) {
-                            if (in_array($opt_count, $ele[$ele_id])) {
-                                $other = checkOther($v['key'], $ele_id, $ele_caption);
-                                if (false !== $other) {
-                                    $ch[] = $other;
-                                } else {
-                                    $ch[] = $myts->stripSlashesGPC($v['key']);
-                                }
-                            }
-                            $opt_count++;
-                        } else {
-                            if (!empty($ele[$ele_id])) {
-                                $ch[] = $myts->stripSlashesGPC($v['key']);
+                //                while ($v = each($ele_value)) {
+                foreach ($ele_value as $v) {
+                    if (is_array($ele[$ele_id])) {
+                        if (in_array($opt_count, $ele[$ele_id])) {
+                            $other = checkOther($v['key'], $ele_id, $ele_caption);
+                            if (false !== $other) {
+                                $ch[] = $other;
+                            } else {
+                                $ch[] = ($v['key']);
                             }
                         }
+                        $opt_count++;
+                    } else {
+                        if (!empty($ele[$ele_id])) {
+                            $ch[] = ($v['key']);
+                        }
                     }
+                }
                 $msg[$ele_id] .= !empty($ch) ? implode("\n", $ch) : '';
                 break;
             case 'select':
                 $opt_count = 1;
                 $ch        = [];
                 if (is_array($ele[$ele_id])) {
-//                    while ($v = each($ele_value[2])) {
+                    //                    while ($v = each($ele_value[2])) {
                     foreach ($ele_value[2] as $v) {
                         if (in_array($opt_count, $ele[$ele_id])) {
-                            $ch[] = $myts->stripSlashesGPC($v['key']);
+                            $ch[] = ($v['key']);
                         }
                         $opt_count++;
                     }
                 } else {
-//                    while ($j = each($ele_value[2])) {
+                    //                    while ($j = each($ele_value[2])) {
                     foreach ($ele_value[2] as $j) {
                         if ($opt_count == $ele[$ele_id]) {
-                            $ch[] = $myts->stripSlashesGPC($j['key']);
+                            $ch[] = ($j['key']);
                         }
                         $opt_count++;
                     }
@@ -186,7 +187,7 @@ foreach ($elements as $i) {
                 $msg[$ele_id] .= !empty($ch) ? implode("\n", $ch) : '';
                 break;
             case 'break': // --- INFORMATUX ---
-                $msg[$ele_id] .= $myts->stripSlashesGPC($ele[0]);
+                $msg[$ele_id] .= ($ele[0]);
                 break; // -------------------------
             default:
                 break;
@@ -204,7 +205,7 @@ if (is_dir(LIAISE_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/mail_te
 $xoopsMailer = xoops_getMailer();
 $xoopsMailer->setTemplateDir($template_dir);
 $xoopsMailer->setTemplate('xliaise.tpl');
-$xoopsMailer->setSubject(sprintf(_LIAISE_MSG_SUBJECT, $myts->stripSlashesGPC($form->getVar('form_title'))));
+$xoopsMailer->setSubject(sprintf(_LIAISE_MSG_SUBJECT, ($form->getVar('form_title'))));
 if (in_array('user', $helper->getConfig('moreinfo'))) {
     if (is_object($xoopsUser)) {
         $xoopsMailer->assign('UNAME', sprintf(_LIAISE_MSG_UNAME, $xoopsUser->getVar('uname')));
@@ -221,11 +222,11 @@ if (in_array('user', $helper->getConfig('moreinfo'))) {
 if (in_array('ip', $helper->getConfig('moreinfo'))) {
     $proxy = $_SERVER['REMOTE_ADDR'];
     $ip    = '';
-    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    if (Request::hasVar('HTTP_X_FORWARDED_FOR', 'SERVER')) {
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } elseif (isset($_SERVER['HTTP_PROXY_CONNECTION'])) {
+    } elseif (Request::hasVar('HTTP_PROXY_CONNECTION', 'SERVER')) {
         $ip = $_SERVER['HTTP_PROXY_CONNECTION'];
-    } elseif (isset($_SERVER['HTTP_VIA'])) {
+    } elseif (Request::hasVar('HTTP_VIA', 'SERVER')) {
         $ip = $_SERVER['HTTP_VIA'];
     }
     $ip = empty($ip) ? $_SERVER['REMOTE_ADDR'] : $ip;
@@ -300,7 +301,7 @@ if (count($err) < 1) {
 // --------- Archivage --------
 global $xoopsDB;
 // Variable (initialisation)
-$form_id      = \Xmf\Request::getInt('form_id', 0, 'POST');
+$form_id      = Request::getInt('form_id', 0, 'POST');
 $form_message = trim($xoopsDB->escape(implode("\n", $msg)));
 $sql_archive  = 'INSERT INTO ' . $xoopsDB->prefix('xliaise_forms_archive') . " VALUES ('', '$form_id', UNIX_TIMESTAMP(), '$form_message')";
 $result       = $xoopsDB->query($sql_archive);
@@ -313,7 +314,7 @@ if (count($err) > 0) {
         }
     }
     // -------------------------------------------------------
-    $GLOBALS['xoopsOption']['template_main'] = 'xliaise_error.html';
+    $GLOBALS['xoopsOption']['template_main'] = 'xliaise_error.tpl';
     // -------------------------------------------------------
     require_once XOOPS_ROOT_PATH . '/header.php';
     $xoopsTpl->assign('error_heading', _LIAISE_ERR_HEADING);
@@ -321,7 +322,7 @@ if (count($err) > 0) {
     $xoopsTpl->assign('go_back', _BACK);
     $xoopsTpl->assign('liaise_url', LIAISE_URL . '/index.php?form_id=' . $form_id);
     $xoopsTpl->assign('xoops_pagetitle', _LIAISE_ERR_HEADING);
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
     exit();
 }
 
@@ -334,13 +335,11 @@ function checkOther($key, $id, $caption)
     global $err, $myts;
     if (!preg_match('/\{OTHER\|+[0-9]+\}/', $key)) {
         return false;
-    } else {
-        if (!empty($_POST['other']['ele_' . $id])) {
-            return _LIAISE_OPT_OTHER . $myts->stripSlashesGPC($_POST['other']['ele_' . $id]);
-        } else {
-            $err[] = sprintf(_LIAISE_ERR_REQ, $caption);
-        }
     }
+    if (!empty($_POST['other']['ele_' . $id])) {
+        return _LIAISE_OPT_OTHER . ($_POST['other']['ele_' . $id]);
+    }
+    $err[] = sprintf(_LIAISE_ERR_REQ, $caption);
 
     return false;
 }

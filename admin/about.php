@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -32,7 +32,7 @@
 ##  URL: http://www.brandycoke.com/                                          ##
 ##  Project: Liaise                                                          ##
 ###############################################################################
-include __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 // --- INFORMATUX ---
 adminHtmlHeader('about.php');
@@ -51,7 +51,7 @@ Copyright &copy; 2003-2005 NS Tai (tuff)
 <p style="margin-top: 0;">
 This software is licensed under the CC-GNU GPL.<br>
 <a href="http://creativecommons.org/licenses/GPL/2.0/" target="_blank">Commons Deed</a> |
-<a href="http://www.gnu.org/copyleft/gpl.html" target="_blank">Legal Code</a>
+<a href="https://www.gnu.org/copyleft/gpl.html" target="_blank">Legal Code</a>
 </p>
 
 <h4 style="margin: 0;">Who to Contact</h4>
@@ -70,6 +70,6 @@ Liaise is Freeware and Opensource. If you think it is useful and would like to s
 </ul>-->
 
 <?php
-include __DIR__ . '/footer.php';
+require_once __DIR__ . '/footer.php';
 xoops_cp_footer();
 ?>

@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -32,7 +32,9 @@
 ##  URL: http://www.brandycoke.com/                                          ##
 ##  Project: Liaise                                                          ##
 ###############################################################################
-include __DIR__ . '/admin_header.php';
+use Xmf\Request;
+
+require_once __DIR__ . '/admin_header.php';
 $myts = \MyTextSanitizer::getInstance();
 $op   = isset($_GET['op']) ? trim($_GET['op']) : 'list';
 $op   = isset($_POST['op']) ? trim($_POST['op']) : $op;
@@ -41,10 +43,11 @@ switch ($op) {
     case 'list':
     default:
         adminHtmlHeader();
-        $criteria = new \Criteria(1, 1);
+        $criteria = new \Criteria('');
         $criteria->setSort('form_order');
         $criteria->setOrder('ASC');
-        if ($forms = $liaise_form_mgr->getObjects($criteria, 'admin_list')) {
+        $forms = $formsHandler->getObjects($criteria, 'admin_list');
+        if ($forms) {
             echo '<form action="' . LIAISE_ADMIN_URL . '" method="post">
                 <table class="outer" cellspacing="1" width="100%">
                     <tr><th colspan="5">' . _AM_FORM_LISTING . '</th></tr>
@@ -60,7 +63,7 @@ switch ($op) {
                 $order     = new \XoopsFormText('', 'order[' . $id . ']', 3, 2, $f->getVar('form_order'));
                 $group_mgr = xoops_getHandler('group');
                 $sendto    = $f->getVar('form_send_to_group');
-                if (false !== $sendto && $group =& $group_mgr->get($sendto)) {
+                if (false !== $sendto && $group = $group_mgr->get($sendto)) {
                     $sendto = $group->getVar('name');
                 } else {
                     $sendto = _AM_FORM_SENDTO_ADMIN;
@@ -92,20 +95,19 @@ switch ($op) {
             echo $hidden->render() . "\n</form>\n";
         }
         break;
-
     case 'edit':
-        $clone   = \Xmf\Request::getInt('clone', false, 'GET');
-        $form_id = \Xmf\Request::getInt('form_id', 0, 'GET');
+        $clone   = Request::getInt('clone', false, 'GET');
+        $form_id = Request::getInt('form_id', 0, 'GET');
         adminHtmlHeader();
         if (!empty($form_id)) {
-            $form = $liaise_form_mgr->get($form_id);
+            $form = $formsHandler->get($form_id);
         } else {
-            $form = $liaise_form_mgr->create();
+            $form = $formsHandler->create();
         }
 
         $text_form_title = new \XoopsFormText(_AM_FORM_TITLE, 'form_title', 50, 255, $form->getVar('form_title', 'e'));
 
-        $group_ids              = $grouppermHandler->getGroupIds($liaise_form_mgr->perm_name, $form_id, $xoopsModule->getVar('mid'));
+        $group_ids              = $grouppermHandler->getGroupIds($formsHandler->perm_name, $form_id, $xoopsModule->getVar('mid'));
         $select_form_group_perm = new \XoopsFormSelectGroup(_AM_FORM_PERM, 'form_group_perm', true, $group_ids, 5, true);
 
         $select_form_send_method = new \XoopsFormSelect(_AM_FORM_SEND_METHOD, 'form_send_method', $form->getVar('form_send_method'));
@@ -175,39 +177,36 @@ switch ($op) {
         $output->addElement($tray);
         $output->display();
         break;
-
     case 'delete':
         if (empty($_POST['ok'])) {
             adminHtmlHeader();
             xoops_confirm(['op' => 'delete', 'form_id' => $_GET['form_id'], 'ok' => 1], LIAISE_ADMIN_URL, _AM_FORM_CONFIRM_DELETE);
         } else {
-            $form_id = \Xmf\Request::getInt('form_id', 0, 'POST');
+            $form_id = Request::getInt('form_id', 0, 'POST');
             if (empty($form_id)) {
                 redirect_header(LIAISE_ADMIN_URL, 0, _AM_NOTHING_SELECTED);
             }
-            $form =& $liaise_form_mgr->get($form_id);
-            $liaise_form_mgr->delete($form);
-            $liaise_ele_mgr = xoops_getModuleHandler('elements');
+            $form = $formsHandler->get($form_id);
+            $formsHandler->delete($form);
+            $liaise_ele_mgr = $helper->getHandler('Elements');
             $criteria       = new \Criteria('form_id', $form_id);
             $liaise_ele_mgr->deleteAll($criteria);
-            $liaise_form_mgr->deleteFormPermissions($form_id);
+            $formsHandler->deleteFormPermissions($form_id);
             redirect_header(LIAISE_ADMIN_URL, 0, _AM_DBUPDATED);
         }
         break;
-
     case 'saveorder':
         if (!isset($_POST['ids']) || count($_POST['ids']) < 1) {
             redirect_header(LIAISE_ADMIN_URL, 0, _AM_NOTHING_SELECTED);
         }
         extract($_POST);
         foreach ($ids as $id) {
-            $form =& $liaise_form_mgr->get($id);
+            $form = $formsHandler->get($id);
             $form->setVar('form_order', $order[$id]);
-            $liaise_form_mgr->insert($form);
+            $formsHandler->insert($form);
         }
         redirect_header(LIAISE_ADMIN_URL, 0, _AM_DBUPDATED);
         break;
-
     case 'saveform':
         if (!isset($_POST['submit'])) {
             redirect_header(LIAISE_ADMIN_URL, 0, _AM_NOTHING_SELECTED);
@@ -215,9 +214,9 @@ switch ($op) {
         $error = '';
         extract($_POST);
         if (!empty($form_id)) {
-            $form = $liaise_form_mgr->get($form_id);
+            $form = $formsHandler->get($form_id);
         } else {
-            $form = $liaise_form_mgr->create();
+            $form = $formsHandler->create();
         }
         $form->setVar('form_send_method', $form_send_method);
         $form->setVar('form_send_to_group', $form_send_to_group);
@@ -228,21 +227,21 @@ switch ($op) {
         $form->setVar('form_desc', $form_desc);
         $form->setVar('form_intro', $form_intro);
         $form->setVar('form_whereto', $form_whereto);
-        if (!$ret = $liaise_form_mgr->insert($form)) {
+        if (!$ret = $formsHandler->insert($form)) {
             $error = $form->getHtmlErrors();
         } else {
-            $liaise_form_mgr->deleteFormPermissions($ret);
+            $formsHandler->deleteFormPermissions($ret);
             if (count($form_group_perm) > 0) {
-                $liaise_form_mgr->insertFormPermissions($ret, $form_group_perm);
+                $formsHandler->insertFormPermissions($ret, $form_group_perm);
             }
             if (!empty($clone_form_id)) {
-                $liaise_ele_mgr = xoops_getModuleHandler('elements');
+                $liaise_ele_mgr = $helper->getHandler('Elements');
                 $criteria       = new \Criteria('form_id', $clone_form_id);
                 $count          = $liaise_ele_mgr->getCount($criteria);
                 if ($count > 0) {
                     $elements = $liaise_ele_mgr->getObjects($criteria);
                     foreach ($elements as $e) {
-                        $cloned =& $e->xoopsClone();
+                        $cloned = &$e->xoopsClone();
                         $cloned->setVar('form_id', $ret);
                         if (!$liaise_ele_mgr->insert($cloned)) {
                             $error .= $cloned->getHtmlErrors();
@@ -250,7 +249,7 @@ switch ($op) {
                     }
                 }
             } elseif (empty($form_id)) {
-                $liaise_ele_mgr = xoops_getModuleHandler('elements');
+                $liaise_ele_mgr = $helper->getHandler('Elements');
                 $error          = $liaise_ele_mgr->insertDefaults($ret);
             }
         }
@@ -267,5 +266,5 @@ switch ($op) {
         break;
 }
 
-include __DIR__ . '/footer.php';
+require_once __DIR__ . '/footer.php';
 xoops_cp_footer();

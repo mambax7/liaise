@@ -3,14 +3,13 @@
 // use GIJOE's Ticket Class
 // use captcha
 
-//
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -37,13 +36,16 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
+use Xmf\Request;
 use XoopsModules\Liaise;
 
 require_once __DIR__ . '/header.php';
 
 /** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
-$myts = \MyTextSanitizer::getInstance();
+$myts   = \MyTextSanitizer::getInstance();
+
+$formsHandler = $helper->getHandler('Forms');
 
 // --- reload ---
 $liaise_error = null;
@@ -51,25 +53,28 @@ $liaise_error = null;
 
 if (empty($_POST['submit'])) {
     global $xoopsTpl;
-    $form_id = \Xmf\Request::getInt('form_id', 0, 'GET');
+    $form_id = Request::getInt('form_id', 0, 'GET');
 
     if (empty($form_id)) {
-        $forms =& $liaise_form_mgr->getPermittedForms();
+        $forms = $formsHandler->getPermittedForms();
         if (false !== $forms && 1 === count($forms)) {
-            $form =& $liaise_form_mgr->get($forms[0]->getVar('form_id'));
+            $form = $formsHandler->get($forms[0]->getVar('form_id'));
             require_once __DIR__ . '/include/form_render.php';
         } else {
             // -------------------------------------------------------
-            $GLOBALS['xoopsOption']['template_main'] = 'xliaise_index.html';
+            $GLOBALS['xoopsOption']['template_main'] = 'xliaise_index.tpl';
             // -------------------------------------------------------
             require_once XOOPS_ROOT_PATH . '/header.php';
             if (count($forms) > 0) {
                 foreach ($forms as $form) {
-                    $xoopsTpl->append('forms', [
-                        'title' => $form->getVar('form_title'),
-                        'desc'  => $form->getVar('form_desc'),
-                        'id'    => $form->getVar('form_id')
-                    ]);
+                    $xoopsTpl->append(
+                        'forms',
+                        [
+                            'title' => $form->getVar('form_title'),
+                            'desc'  => $form->getVar('form_desc'),
+                            'id'    => $form->getVar('form_id'),
+                        ]
+                    );
                 }
                 $xoopsTpl->assign('forms_intro', $myts->displayTarea($helper->getConfig('intro')));
             }
@@ -77,32 +82,31 @@ if (empty($_POST['submit'])) {
     } else {
         if (5 == $form_id) {
         }
-        if (!$form =& $liaise_form_mgr->get($form_id)) {
+        if (!$form = $formsHandler->get($form_id)) {
             header('Location: ' . LIAISE_URL);
             exit();
+        }
+        if (false !== $formsHandler->getSingleFormPermission($form_id)) {
+            require_once __DIR__ . '/include/form_render.php';
         } else {
-            if (false !== $liaise_form_mgr->getSingleFormPermission($form_id)) {
-                require_once __DIR__ . '/include/form_render.php';
-            } else {
-                header('Location: ' . LIAISE_URL);
-                exit();
-            }
+            header('Location: ' . LIAISE_URL);
+            exit();
         }
     }
 
     $xoopsTpl->assign('forms_breadcrumb', $helper->getConfig('breadcrumb'));
-    require XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
 } else {
-    $form_id = \Xmf\Request::getInt('form_id', 0, 'POST');
+    $form_id = Request::getInt('form_id', 0, 'POST');
     if (empty($form_id)
-        || !$form =& $liaise_form_mgr->get($form_id)
-                     || false === $liaise_form_mgr->getSingleFormPermission($form_id)) {
+        || !$form = $formsHandler->get($form_id)
+                    || false === $formsHandler->getSingleFormPermission($form_id)) {
         header('Location: ' . LIAISE_URL);
         exit();
     }
 
     // --- GIJOE's Ticket Class ---
-//    require_once LIAISE_ROOT_PATH . 'include/gtickets.php';
+    //    require_once LIAISE_ROOT_PATH . 'include/gtickets.php';
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         $liaise_error = 'Ticket Error';
@@ -111,7 +115,7 @@ if (empty($_POST['submit'])) {
 
     // ---------- captcha ---------
     if ($helper->getConfig('captcha') && empty($liaise_error)) {
-        require_once LIAISE_ROOT_PATH . 'class/captcha_x/class.captcha_x.php';
+        //        require_once LIAISE_ROOT_PATH . 'class/captcha_x/class.captcha_x.php';
         $captcha = new captcha_x();
         if (!isset($_POST['captcha']) || !$captcha->validate($_POST['captcha'])) {
             $liaise_error = _LIAISE_CAPTCHA_ERROR;
@@ -121,12 +125,12 @@ if (empty($_POST['submit'])) {
 
     // ----------- reload ---------
     if ($liaise_error) {
-        if (!$form =& $liaise_form_mgr->get($form_id)) {
+        if (!$form = $formsHandler->get($form_id)) {
             header('Location: ' . LIAISE_URL);
             exit();
         }
         require_once __DIR__ . '/include/form_render.php';
-        require XOOPS_ROOT_PATH . '/footer.php';
+        require_once XOOPS_ROOT_PATH . '/footer.php';
         exit();
     }
     // ----------------------------

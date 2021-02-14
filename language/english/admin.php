@@ -1,8 +1,8 @@
 <?php
+
 define('_AM_LIAISE_MODULEADMIN_MISSING', 'The ModuleAdmin class is not installed, install it on your xoops.<br>/Frameworks/moduleclasses/moduleadmin/');
 defined('_AM_DBUPDATED') or define('_AM_DBUPDATED', 'Database updated!');
 
-//
 define('_AM_SAVE', 'Save');
 define('_AM_COPIED', '%s copied');
 define('_AM_ELE_CREATE', 'Create form element');
@@ -71,7 +71,7 @@ define('_AM_FORM_ACTION_EDITELEMENT', 'Edit form elements');
 define('_AM_FORM_ACTION_CLONE', 'Clone form');
 define('_AM_FORM_ACTION_ARCHIVE', 'View messages');
 
-define('_AM_FORM_NEW', 'Cretate a new form');
+define('_AM_FORM_NEW', 'Create a new form');
 define('_AM_FORM_EDIT', 'Edit form: %s');
 define('_AM_FORM_CONFIRM_DELETE', 'Are you sure you want to delete this form and all form elements?');
 

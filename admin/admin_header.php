@@ -2,14 +2,13 @@
 // 2006-12-20 K.OHWADA
 // use GIJOE's Ticket Class
 
-//
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -36,33 +35,27 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
+use Xmf\Module\Admin;
 use XoopsModules\Liaise;
 
 // includes
-include  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include  dirname(__DIR__) . '/include/common.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(__DIR__) . '/include/common.php';
 define('LIAISE_ADMIN_URL', LIAISE_URL . 'admin/index.php');
 define('_LIAISE_ADMIN_URL', LIAISE_URL . 'admin/');
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/header.inc.php';
 
-// --- INFORMATUX ---
-if (file_exists($GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php'))) {
-    require_once $GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php');
-} else {
-    redirect_header('../../../admin.php', 5, _AM_LIAISE_MODULEADMIN_MISSING, false);
-}
-
 /** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 $helper->loadLanguage('modinfo');
 
-/** @var XoopsModuleHandler $moduleHandler */
+/** @var \XoopsModuleHandler $moduleHandler */
 $moduleHandler   = xoops_getHandler('module');
 $moduleInfo      = $moduleHandler->get($xoopsModule->getVar('mid'));
 $pathModuleAdmin = $xoopsModule->getInfo('dirmoduleadmin');
-$pathIcon16      = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon16      = \Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16      = Admin::iconUrl('', 16);
+$pathIcon16      = Admin::iconUrl('', 32);
 
 $myts = \MyTextSanitizer::getInstance();
 // --------
@@ -82,7 +75,7 @@ function adminHtmlHeader($navigation = 'index.php')
     echo '<link rel="stylesheet" type="text/css" media="all" href="' . $urlMod . '/css/xliaise_style.css">';
 
     /* Nice Xoops GUI */
-    $adminObject = \Xmf\Module\Admin::getInstance();
+    $adminObject = Admin::getInstance();
     $adminObject->displayNavigation($navigation);
 
     switch ($navigation) {
@@ -137,7 +130,7 @@ function adminHtmlHeader($navigation = 'index.php')
             break;
         case 'editelement.php':
         case 'elements.php':
-            //
+
             break;
         case 'about.php':
             $adminObject->displayAbout();
@@ -188,14 +181,14 @@ function formatDate($date)
 
 function truncate($string, $max_length = 30, $replacement = '', $trunc_at_space = false)
 {
-    $max_length    -= strlen($replacement);
-    $string_length = strlen($string);
+    $max_length    -= mb_strlen($replacement);
+    $string_length = mb_strlen($string);
 
     if ($string_length <= $max_length) {
         return $string;
     }
 
-    if ($trunc_at_space && ($space_position = strrpos($string, ' ', $max_length - $string_length))) {
+    if ($trunc_at_space && ($space_position = mb_strrpos($string, ' ', $max_length - $string_length))) {
         $max_length = $space_position;
     }
 

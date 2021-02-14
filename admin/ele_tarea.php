@@ -1,12 +1,12 @@
 <?php
-//
+
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                    XOOPS - PHP Content Management System                  ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -46,7 +46,7 @@ $rows    = !empty($value[1]) ? $value[1] : $helper->getConfig('ta_rows');
 $cols    = !empty($value[2]) ? $value[2] : $helper->getConfig('ta_cols');
 $rows    = new \XoopsFormText(_AM_ELE_ROWS, 'ele_value[1]', 3, 3, $rows);
 $cols    = new \XoopsFormText(_AM_ELE_COLS, 'ele_value[2]', 3, 3, $cols);
-$default = new \XoopsFormTextArea(_AM_ELE_DEFAULT, 'ele_value[0]', isset($value[0]) ? $myts->htmlSpecialChars($myts->stripSlashesGPC($value[0])) : '', 5, 50);
+$default = new \XoopsFormTextArea(_AM_ELE_DEFAULT, 'ele_value[0]', isset($value[0]) ? htmlspecialchars(($value[0])) : '', 5, 50);
 $output->addElement($rows, 1);
 $output->addElement($cols, 1);
 $output->addElement($default);

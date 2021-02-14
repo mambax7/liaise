@@ -3,14 +3,13 @@
 // change mail_charset for Japanese
 // add captcha
 
-//
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -33,19 +32,19 @@
 ##  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA ##
 ###############################################################################
 
-include __DIR__ . '/preloads/autoloader.php';
+require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
-$modversion['version']       = '2.00';
-$modversion['module_status'] = 'FINAL';
-$modversion['release_date']  = '2015/11/18';
+$modversion['version']       = '2.10';
+$modversion['module_status'] = 'Beta 1';
+$modversion['release_date']  = '2021/02/14';
 $modversion['name']          = _MI_LIAISE_NAME;
 $modversion['description']   = _MI_LIAISE_DESC;
 $modversion['author']        = 'NS Tai (aka tuff)';
 $modversion['credits']       = "<a href='http://www.brandycoke.com/' target='_blank'>Brandycoke Productions</a>";
 $modversion['help']          = 'page=help';
-$modversion['license']       = "<a href='http://creativecommons.org/licenses/GPL/2.0/' target='_blank'>Human-Readable Commons Deed</a><br><a href='http://www.gnu.org/copyleft/gpl.html' target='_blank'>Full Legal Code</a>";
+$modversion['license']       = "<a href='http://creativecommons.org/licenses/GPL/2.0/' target='_blank'>Human-Readable Commons Deed</a><br><a href='https://www.gnu.org/copyleft/gpl.html' target='_blank'>Full Legal Code</a>";
 $modversion['official']      = 0;
 $modversion['image']         = 'images/xliaise.png';
 $modversion['dirname']       = $moduleDirName;
@@ -60,10 +59,10 @@ $modversion['system_menu'] = 1;
 
 // About
 $modversion['module_website_url']  = '//www.brandycoke.com/';
-$modversion['module_website_name'] = "Brandycoke Productions <a href='//www.informatux.com/'>& maintened by INFORMATUX</a>";
+$modversion['module_website_name'] = "Brandycoke Productions <a href='//www.informatux.com/'>& maintained by INFORMATUX</a>";
 $modversion['status_version']      = 'Stable';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.9';
+$modversion['min_php']             = '7.2';
+$modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
 
@@ -94,13 +93,13 @@ $modversion['onInstall'] = 'include/functions.php';
 // ----------------------------------------------------------
 // Templates
 // ----------------------------------------------------------
-$modversion['templates'][1]['file']        = 'xliaise_index.html';
+$modversion['templates'][1]['file']        = 'xliaise_index.tpl';
 $modversion['templates'][1]['description'] = _MI_LIAISE_TMPL_MAIN_DESC;
-$modversion['templates'][2]['file']        = 'xliaise_form.html';
+$modversion['templates'][2]['file']        = 'xliaise_form.tpl';
 $modversion['templates'][2]['description'] = _MI_LIAISE_TMPL_FORM_DESC;
-$modversion['templates'][3]['file']        = 'xliaise_error.html';
+$modversion['templates'][3]['file']        = 'xliaise_error.tpl';
 $modversion['templates'][3]['description'] = _MI_LIAISE_TMPL_ERROR_DESC;
-$modversion['templates'][4]['file']        = 'xliaise_header.html';
+$modversion['templates'][4]['file']        = 'xliaise_header.tpl';
 $modversion['templates'][4]['description'] = _MI_LIAISE_TMPL_HEADER_DESC;
 
 // ----------------------------------------------------------
@@ -149,7 +148,7 @@ $modversion['config'][5]['options']     = [
     _MI_LIAISE_MOREINFO_USER  => 'user',
     _MI_LIAISE_MOREINFO_IP    => 'ip',
     _MI_LIAISE_MOREINFO_AGENT => 'agent',
-    _MI_LIAISE_MOREINFO_FORM  => 'form'
+    _MI_LIAISE_MOREINFO_FORM  => 'form',
 ];
 
 // $helper->getConfig('mail_charset')
@@ -226,4 +225,4 @@ $modversion['config'][13]['title']       = '_MI_LIAISE_BREADCRUMB';
 $modversion['config'][13]['description'] = '_MI_LIAISE_BREADCRUMB_DESC';
 $modversion['config'][13]['formtype']    = 'yesno';
 $modversion['config'][13]['valuetype']   = 'int';
-$modversion['config'][13]['default']     = 1;// -----
+$modversion['config'][13]['default']     = 1; // -----

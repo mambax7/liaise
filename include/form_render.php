@@ -3,14 +3,13 @@
 // use GIJOE's Ticket Class
 // use captcha
 
-//
 ###############################################################################
 ##                Liaise -- Contact forms generator for XOOPS                ##
 ##                 Copyright (c) 2003-2005 NS Tai (aka tuff)                 ##
 ##                       <http://www.brandycoke.com>                        ##
 ###############################################################################
 ##                   XOOPS - PHP Content Management System                   ##
-##                       Copyright (c) 2000-2016 XOOPS.org                        ##
+##                       Copyright (c) 2000-2020 XOOPS.org                        ##
 ##                          <https://xoops.org>                          ##
 ###############################################################################
 ##  This program is free software; you can redistribute it and/or modify     ##
@@ -37,21 +36,23 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
-use XoopsModules\Liaise;
+use XoopsModules\Liaise\{
+    Helper,
+    ElementRenderer
+};
+/** @var Helper $helper */
 
 if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-$liaise_ele_mgr = xoops_getModuleHandler('elements');
-require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
-
-/** @var Liaise\Helper $helper */
-$helper = Liaise\Helper::getInstance();
+$helper = Helper::getInstance();
+$liaise_ele_mgr = $helper->getHandler('Elements');
+//require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
 
 // -------------------------------------------------------
-$GLOBALS['xoopsOption']['template_main'] = 'xliaise_form.html';
+$GLOBALS['xoopsOption']['template_main'] = 'xliaise_form.tpl';
 // -------------------------------------------------------
 require_once XOOPS_ROOT_PATH . '/header.php';
 $criteria = new \CriteriaCompo();
@@ -63,8 +64,8 @@ $elements = $liaise_ele_mgr->getObjects($criteria, true);
 
 $form_output = new \XoopsThemeForm($form->getVar('form_title'), 'liaise_' . $form->getVar('form_id'), LIAISE_URL . 'index.php');
 foreach ($elements as $i) {
-    $renderer = new \LiaiseElementRenderer($i);
-    $form_ele =& $renderer->constructElement();
+    $renderer = new ElementRenderer($i);
+    $form_ele = &$renderer->constructElement();
     $req      = (int)$i->getVar('ele_req');
     $form_output->addElement($form_ele, $req);
     unset($form_ele);
@@ -131,15 +132,18 @@ foreach ($form_output->getElements() as $e) {
     $c++;
 }
 $js = $form_output->renderValidationJS();
-$xoopsTpl->assign('form_output', [
-    'title'      => $form_output->getTitle(),
-    'name'       => $form_output->getName(),
-    'action'     => $form_output->getAction(),
-    'method'     => $form_output->getMethod(),
-    'extra'      => 'onsubmit="return xoopsFormValidate_' . $form_output->getName() . '();"' . $form_output->getExtra(),
-    'javascript' => $js,
-    'elements'   => $eles
-]);
+$xoopsTpl->assign(
+    'form_output',
+    [
+        'title'      => $form_output->getTitle(),
+        'name'       => $form_output->getName(),
+        'action'     => $form_output->getAction(),
+        'method'     => $form_output->getMethod(),
+        'extra'      => 'onsubmit="return xoopsFormValidate_' . $form_output->getName() . '();"' . $form_output->getExtra(),
+        'javascript' => $js,
+        'elements'   => $eles,
+    ]
+);
 
 $xoopsTpl->assign('form_req_prefix', $helper->getConfig('prefix'));
 $xoopsTpl->assign('form_req_suffix', $helper->getConfig('suffix'));

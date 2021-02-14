@@ -2,7 +2,6 @@
 // 2006-12-20 K.OHWADA
 // add captcha
 
-//
 define('_LIAISE_MSG_SUBJECT', '%s');    // Site name removed since verion 1.22
 define('_LIAISE_MSG_SENT', 'Your message has been sent.<br>We thank you for your message.');
 

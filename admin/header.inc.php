@@ -1,5 +1,6 @@
 <?php
 /* ******************************************* */
+
 /*                INFORMATUX                   */
 /*         http://www.informatux.com/          */
 /*       SOLUTIONS AND WEB DEVELOPMENT         */
@@ -7,7 +8,7 @@
 /*                   2015                      */
 /* ------------------------------------------- */
 /*    XOOPS - PHP Content Management System    */
-/*         Copyright (c) 2000-2016 XOOPS.org        */
+/*         Copyright (c) 2000-2020 XOOPS.org        */
 /*            <https://xoops.org>          */
 /* ******************************************* */
 
@@ -51,10 +52,10 @@ function getFormTitle($form_id)
         $result = $xoopsDB->query($sql);
         if (!$result) {
             return false;
-        } else {
-            return $xoopsDB->fetchArray($result);
         }
-    } else {
-        return false;
+
+        return $xoopsDB->fetchArray($result);
     }
+
+    return false;
 }

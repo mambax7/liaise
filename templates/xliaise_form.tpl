@@ -31,7 +31,7 @@
           method="<{$form_output.method}>" class="liaise" <{$form_output.extra}>>
         <table class="outer">
             <{foreach item=element from=$form_output.elements}>
-                <{if $element.hidden != true}>
+                <{if $element.hidden !== true}>
                     <tr>
                         <{if $element.caption|strstr:"[BREAK]"}>
                             <td class="xliaise_break" colspan="2">
@@ -49,7 +49,7 @@
             <{/foreach}>
         </table>
         <{foreach item=element from=$form_output.elements}>
-            <{if $element.hidden == true}>
+            <{if $element.hidden === true}>
                 <{$element.body}>
             <{/if}>
         <{/foreach}>
