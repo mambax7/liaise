@@ -53,7 +53,9 @@ $formsHandler = $helper->getHandler('Forms');
 if (false !== LIAISE_UPLOAD_PATH) {
     if (!is_dir(LIAISE_UPLOAD_PATH)) {
         $oldumask = umask(0);
-        mkdir(LIAISE_UPLOAD_PATH, 0777);
+        if (!mkdir($concurrentDirectory = LIAISE_UPLOAD_PATH, 0777) && !is_dir($concurrentDirectory)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+        }
         umask($oldumask);
     }
     if (is_dir(LIAISE_UPLOAD_PATH) && !is_writable(LIAISE_UPLOAD_PATH)) {
