@@ -39,7 +39,7 @@ use Xmf\Module\Admin;
 use XoopsModules\Liaise;
 
 // includes
-require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(__DIR__, 3) . '/include/cp_header.php';
 require_once dirname(__DIR__) . '/include/common.php';
 define('LIAISE_ADMIN_URL', LIAISE_URL . 'admin/index.php');
 define('_LIAISE_ADMIN_URL', LIAISE_URL . 'admin/');
