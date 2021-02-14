@@ -226,7 +226,7 @@ if (in_array('ip', $helper->getConfig('moreinfo'))) {
     }
     $ip = empty($ip) ? $_SERVER['REMOTE_ADDR'] : $ip;
     if ($proxy != $ip) {
-        $ip = $ip . sprintf(_LIAISE_PROXY, $proxy);
+        $ip .= sprintf(_LIAISE_PROXY, $proxy);
     }
     $xoopsMailer->assign('IP', sprintf(_LIAISE_MSG_IP, $ip));
 } else {
