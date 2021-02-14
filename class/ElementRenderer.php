@@ -98,7 +98,7 @@ class ElementRenderer
                 $form_ele = new \XoopsFormText(
                     $ele_caption, $form_ele_id, $ele_value[0],    //    box width
                     $ele_value[1],    //    max width
-                    htmlspecialchars(($ele_value[2]))    //    default value
+                    htmlspecialchars(($ele_value[2]), ENT_QUOTES | ENT_HTML5)    //    default value
                 );
                 break;
             case 'textarea':
@@ -110,7 +110,7 @@ class ElementRenderer
                 // ---
 
                 $form_ele = new \XoopsFormTextArea(
-                    $ele_caption, $form_ele_id, htmlspecialchars(($ele_value[0])), //    default value
+                    $ele_caption, $form_ele_id, htmlspecialchars(($ele_value[0]), ENT_QUOTES | ENT_HTML5), //    default value
                     $ele_value[1],    //    rows
                     $ele_value[2]    //    cols
                 );
@@ -128,7 +128,7 @@ class ElementRenderer
                     $form_ele = new \XoopsFormLabel($ele_caption, $myts->displayTarea(($ele_value[0]), 1));
                 } else {
                     $form_ele = new \XoopsFormDhtmlTextArea(
-                        $ele_caption, $form_ele_id, htmlspecialchars(($ele_value[0])), //    default value
+                        $ele_caption, $form_ele_id, htmlspecialchars(($ele_value[0]), ENT_QUOTES | ENT_HTML5), //    default value
                         $ele_value[1],    //    rows
                         $ele_value[2]    //    cols
                     );
@@ -302,7 +302,7 @@ class ElementRenderer
                 $sql    = 'SELECT ele_caption FROM ' . $xoopsDB->prefix() . '_xliaise_formelements WHERE ele_id = ' . $ele_id;
                 $result = $xoopsDB->query($sql);
                 [$element_caption] = $xoopsDB->fetchRow($result);
-                $form_ele = new \XoopsFormElementTray(htmlspecialchars(('[BREAK]' . $element_caption)), '&nbsp;');
+                $form_ele = new \XoopsFormElementTray(htmlspecialchars(('[BREAK]' . $element_caption), ENT_QUOTES | ENT_HTML5), '&nbsp;');
                 break;
             // ---------------
 
@@ -334,7 +334,7 @@ class ElementRenderer
         if (isset($_POST['other'][$id])) {
             $myts = \MyTextSanitizer::getInstance();
             $val  = $_POST['other'][$id];
-            $val  = htmlspecialchars(($val));
+            $val  = htmlspecialchars(($val), ENT_QUOTES | ENT_HTML5);
         }
         $box = new \XoopsFormText('', 'other[' . $id . ']', $len, 255, $val);
 

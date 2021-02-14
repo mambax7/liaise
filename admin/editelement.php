@@ -103,7 +103,7 @@ switch ($op) {
             $display          = $element->getVar('ele_display');
             $order            = $element->getVar('ele_order');
         } else {
-            $ele_caption      = htmlspecialchars(($ele_caption));
+            $ele_caption      = htmlspecialchars(($ele_caption), ENT_QUOTES | ENT_HTML5);
             $text_ele_caption = new \XoopsFormText(_AM_ELE_CAPTION, 'ele_caption', 50, 255, $ele_caption);
             $req              = isset($_POST['ele_req']) ? 1 : 0;
             $display          = isset($_POST['ele_display']) ? 1 : 0;

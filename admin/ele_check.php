@@ -41,7 +41,7 @@ $opt_count = 0;
 if (empty($addopt) && !empty($ele_id)) {
     $keys = array_keys($value);
     for ($i = 0, $iMax = count($keys); $i < $iMax; ++$i) {
-        $v         = htmlspecialchars(($keys[$i]));
+        $v         = htmlspecialchars(($keys[$i]), ENT_QUOTES | ENT_HTML5);
         $options[] = addOption('ele_value[' . $opt_count . ']', 'checked[' . $opt_count . ']', $v, 'check', $value[$keys[$i]]);
         $opt_count++;
     }
@@ -49,7 +49,7 @@ if (empty($addopt) && !empty($ele_id)) {
     if (isset($ele_value) && count($ele_value) > 0) {
         //        while ($v = each($ele_value)) {
         foreach ($ele_value as $v) {
-            $v['value'] = htmlspecialchars(($v['value']));
+            $v['value'] = htmlspecialchars(($v['value']), ENT_QUOTES | ENT_HTML5);
             if (!empty($v['value'])) {
                 $options[] = addOption('ele_value[' . $opt_count . ']', 'checked[' . $opt_count . ']', $v['value'], 'check', $checked[$v['key']]);
                 $opt_count++;
