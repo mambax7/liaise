@@ -156,7 +156,9 @@ class Uploader
             $this->setErrors('You either did not choose a file to upload or the server has insufficient read/writes to upload this file.');
 
             return false;
-        } elseif (\is_array($_FILES[$media_name]['name']) && isset($index)) {
+        }
+
+        if (\is_array($_FILES[$media_name]['name']) && isset($index)) {
             $index              = (int)$index;
             $this->mediaName    = @\get_magic_quotes_gpc() ? \stripslashes($_FILES[$media_name]['name'][$index]) : $_FILES[$media_name]['name'][$index];
             $this->mediaType    = $_FILES[$media_name]['type'][$index];
