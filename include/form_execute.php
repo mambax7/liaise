@@ -98,10 +98,8 @@ foreach ($elements as $i) {
                             'name'   => $_FILES['ele_' . $ele_id]['name'],
                             'saveto' => $ele_value[3],
                         ];
-                    } else {
-                        if (count($uploader[$ele_id]->errors) > 0) {
+                    } elseif (count($uploader[$ele_id]->errors) > 0) {
                             $err[] = $uploader[$ele_id]->getErrors();
-                        }
                     }
                 }
                 break;
@@ -156,10 +154,8 @@ foreach ($elements as $i) {
                             }
                         }
                         $opt_count++;
-                    } else {
-                        if (!empty($ele[$ele_id])) {
+                    } elseif (!empty($ele[$ele_id])) {
                             $ch[] = ($v['key']);
-                        }
                     }
                 }
                 $msg[$ele_id] .= !empty($ch) ? implode("\n", $ch) : '';
@@ -280,12 +276,10 @@ if (count($attachments) > 0) {
                 $uploaded[]    = LIAISE_UPLOAD_PATH . $saved;
                 $msg[$a['id']] .= sprintf(_LIAISE_UPLOADED_FILE, LIAISE_URL . 'admin/file.php?f=' . $saved);
             }
-        } else {
-            if (false === $xoopsMailer->multimailer->addAttachment($a['path'], $a['name'])) {
+        } elseif (false === $xoopsMailer->multimailer->addAttachment($a['path'], $a['name'])) {
                 $err[] = $xoopsMailer->multimailer->ErrorInfo;
             } else {
                 $msg[$a['id']] .= sprintf(_LIAISE_ATTACHED_FILE, $_FILES['ele_' . $a['id']]['name']);
-            }
         }
     }
 }

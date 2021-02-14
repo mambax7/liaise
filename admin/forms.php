@@ -338,15 +338,13 @@ switch ($op) {
 
         if (empty($form_id)) {
             $caption = _AM_FORM_NEW;
-        } else {
-            if ($clone) {
+        } elseif ($clone) {
                 $caption         = sprintf(_AM_COPIED, $form->getVar('form_title'));
                 $clone_form_id   = new \XoopsFormHidden('clone_form_id', $form_id);
                 $text_form_title = new \XoopsFormText(_AM_FORM_TITLE, 'form_title', 50, 255, sprintf(_AM_COPIED, $form->getVar('form_title', 'e')));
             } else {
                 $caption        = sprintf(_AM_FORM_EDIT, $form->getVar('form_title'));
                 $hidden_form_id = new \XoopsFormHidden('form_id', $form_id);
-            }
         }
         $output = new \XoopsThemeForm($caption, 'editform', _LIAISE_ADMIN_URL . 'forms.php');
         $output->addElement($text_form_title, true);
@@ -501,12 +499,10 @@ switch ($op) {
         if (!empty($error)) {
             adminHtmlHeader('forms.php');
             echo $error;
-        } else {
-            if (Request::hasVar('submit2', 'POST')) {
+        } elseif (Request::hasVar('submit2', 'POST')) {
                 redirect_header(LIAISE_URL . 'admin/elements.php?form_id=' . $ret, 0, _AM_DBUPDATED);
             } else {
                 redirect_header(_LIAISE_ADMIN_URL . 'forms.php', 0, _AM_DBUPDATED);
-            }
         }
         break;
 }

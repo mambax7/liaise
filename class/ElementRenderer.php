@@ -142,15 +142,11 @@ class ElementRenderer
                                     $selected[] = $opt_count;
                                 }
                             }
-                        } else {
-                            if ($post_val == $opt_count) {
+                        } elseif ($post_val == $opt_count) {
                                 $selected[] = $opt_count;
-                            }
                         }
-                    } else {
-                        if ($v > 0) {
+                    } elseif ($v > 0) {
                             $selected[] = $opt_count;
-                        }
                     }
                     // ---
 
@@ -184,15 +180,11 @@ class ElementRenderer
                                     $selected[] = $opt_count;
                                 }
                             }
-                        } else {
-                            if ($post_val == $opt_count) {
+                        } elseif ($post_val == $opt_count) {
                                 $selected[] = $opt_count;
-                            }
                         }
-                    } else {
-                        if ($v > 0) {
+                    } elseif ($v > 0) {
                             $selected[] = $opt_count;
-                        }
                     }
                     // ---
 
@@ -237,10 +229,8 @@ class ElementRenderer
                         if ($post_val == $opt_count) {
                             $selected = $opt_count;
                         }
-                    } else {
-                        if ($v > 0) {
+                    } elseif ($v > 0) {
                             $selected = $opt_count;
-                        }
                     }
                     // ---
 

@@ -174,8 +174,7 @@ if (!isset($_POST['op']) || 'save' !== $_POST['op']) {
                             }
                             $opt_count++;
                         }
-                    } else {
-                        if (count($value[2]) > 1) {
+                    } elseif (count($value[2]) > 1) {
                             //while ($j = each($value[2])) {
                             foreach ($value[2] as $j) {
                                 if ($opt_count == $ele_value[$id]) {
@@ -195,7 +194,7 @@ if (!isset($_POST['op']) || 'save' !== $_POST['op']) {
                                 }
                             }
                         }
-                    }
+
                     $value[2] = $new_vars;
                 } else {
                     foreach ($value[2] as $k => $v) {
@@ -216,20 +215,18 @@ if (!isset($_POST['op']) || 'save' !== $_POST['op']) {
                         }
                         $opt_count++;
                     }
+                } elseif (count($value) > 1) {
+                    //                        while ($j = each($value)) {
+                    foreach ($value as $j) {
+                        $new_vars[$j['key']] = 0;
+                    }
                 } else {
-                    if (count($value) > 1) {
-                        //                        while ($j = each($value)) {
-                        foreach ($value as $j) {
-                            $new_vars[$j['key']] = 0;
-                        }
-                    } else {
-                        //                        while ($j = each($value)) {
-                        foreach ($value as $j) {
-                            if (!empty($ele_value[$id])) {
-                                $new_vars = [$j['key'] => 1];
-                            } else {
-                                $new_vars = [$j['key'] => 0];
-                            }
+                    //                        while ($j = each($value)) {
+                    foreach ($value as $j) {
+                        if (!empty($ele_value[$id])) {
+                            $new_vars = [$j['key'] => 1];
+                        } else {
+                            $new_vars = [$j['key'] => 0];
                         }
                     }
                 }
