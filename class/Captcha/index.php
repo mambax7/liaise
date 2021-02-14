@@ -1,5 +1,7 @@
 <?php
 
+use XoopsModules\Liaise\Captchax;
+
 session_start();
 
 ?>
@@ -29,9 +31,9 @@ if (!$_POST['validate']) {
     die;
 }
 
-require_once __DIR__ . '/class.captcha_x.php';
+//require_once __DIR__ . '/class.captcha_x.php';
 
-$captcha = new captcha_x();
+$captcha = new Captchax();
 if (!$captcha->validate($_POST['captcha'])) {
     echo '<p>You\'re bot.</p>';
 } else {

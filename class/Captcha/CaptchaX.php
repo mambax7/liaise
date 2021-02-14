@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Liaise\Captchax;
+
 // 2006-12-20 K.OHWADA
 // session start in other process
 // Notice: Undefined variable: no_putenv
@@ -48,7 +51,7 @@
  * @package CAPTCHA X
  * @license GPL
  */
-class CaptchaX
+class Captchax
 {
     /**
      * Parsed captcha_x.ini

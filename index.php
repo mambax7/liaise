@@ -98,8 +98,8 @@ if (empty($_POST['submit'])) {
 } else {
     $form_id = Request::getInt('form_id', 0, 'POST');
     if (empty($form_id)
-        || !$form = $formsHandler->get($form_id)
-                    || false === $formsHandler->getSingleFormPermission($form_id)) {
+        || !$form = ($formsHandler->get($form_id)
+                     || false === $formsHandler->getSingleFormPermission($form_id))) {
         header('Location: ' . LIAISE_URL);
         exit();
     }
