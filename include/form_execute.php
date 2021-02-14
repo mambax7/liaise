@@ -52,7 +52,7 @@ $elements = $liaise_ele_mgr->getObjects($criteria, true);
 
 $msg = $err = $attachments = [];
 foreach ($_POST as $k => $v) {
-    if (preg_match('/^ele_[0-9]+$/', $k)) {
+    if (preg_match('/^ele_\d+$/', $k)) {
         $n          = explode('_', $k);
         $ele[$n[1]] = $v;
     }
@@ -332,7 +332,7 @@ redirect_header($whereto, 0, _LIAISE_MSG_SENT);
 function checkOther($key, $id, $caption)
 {
     global $err, $myts;
-    if (!preg_match('/\{OTHER\|+[0-9]+\}/', $key)) {
+    if (!preg_match('/\{OTHER\|+\d+\}/', $key)) {
         return false;
     }
     if (!empty($_POST['other']['ele_' . $id])) {

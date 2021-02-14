@@ -239,7 +239,7 @@ class ElementRenderer
     public function optOther($s, $id)
     {
         $helper = Liaise\Helper::getInstance();
-        if (!preg_match('/\{OTHER\|+[0-9]+\}/', $s)) {
+        if (!preg_match('/\{OTHER\|+\d+\}/', $s)) {
             return false;
         }
         $s   = explode('|', preg_replace('/[\{\}]/', '', $s));
