@@ -140,10 +140,10 @@ class CaptchaX
         $color = imagecolorallocate($this->image, $color[0], $color[1], $color[2]);
 
         for ($i = 0; $i < $noise; ++$i) {
-            if (mt_rand(1, 100) > $dust_vs_scratches) {
-                imageline($this->image, mt_rand(0, $max_x), mt_rand(0, $max_y), mt_rand(0, $max_x), mt_rand(0, $max_y), $color);
+            if (random_int(1, 100) > $dust_vs_scratches) {
+                imageline($this->image, random_int(0, $max_x), random_int(0, $max_y), random_int(0, $max_x), random_int(0, $max_y), $color);
             } else {
-                imagesetpixel($this->image, mt_rand(0, $max_x), mt_rand(0, $max_y), $color);
+                imagesetpixel($this->image, random_int(0, $max_x), random_int(0, $max_y), $color);
             }
         }
     }
@@ -180,7 +180,7 @@ class CaptchaX
         $letters_max = (count($letters) - 1);
 
         for ($i = 0; $i < $letters_no; ++$i) {
-            $letter_index = mt_rand(0, $letters_max);
+            $letter_index = random_int(0, $letters_max);
             $rtn_val[]    = $letters[$letter_index];
         }
 
@@ -238,19 +238,19 @@ class CaptchaX
         unset($a);
 
         for ($i = 0; $i < $letters_no; ++$i) {
-            $size_index = mt_rand(0, $font_size_count);
+            $size_index = random_int(0, $font_size_count);
             $size       = $font_size[$size_index];
 
-            $angle = ((mt_rand(0, $letter_precession * 2) - $letter_precession) + 360) % 360;
+            $angle = ((random_int(0, $letter_precession * 2) - $letter_precession) + 360) % 360;
 
             $x = $padding_left + ($box_width * $i);
             $y = $padding_top + $size + (($box_height - $size) / 2);
 
-            $color_index = mt_rand(0, $fg_colors_count);
+            $color_index = random_int(0, $fg_colors_count);
             $color       = $fg_colors[$color_index];
             $color       = imagecolorallocate($this->image, $color[0], $color[1], $color[2]);
 
-            $font_index = mt_rand(0, $fonts_count);
+            $font_index = random_int(0, $fonts_count);
             $font       = $fonts[$font_index];
 
             imagettftext($this->image, $size, $angle, $x, $y, $color, $font, $this->letters[$i]);
