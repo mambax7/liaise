@@ -56,8 +56,8 @@ function adminHtmlHeader()
     ];
     $links[]     = [0 => LIAISE_URL . 'admin/about.php', 1 => 'About'];
     $admin_links = '<table class="outer" width="100%" cellspacing="1"><tr>';
-    for ($i = 0, $iMax = count($links); $i < $iMax; ++$i) {
-        $admin_links .= '<td class="even" style="width: 20%; text-align: center;"><a href="' . $links[$i][0] . '" accesskey="' . ($i + 1) . '">' . $links[$i][1] . '</a></td>';
+    foreach ($links as $i => $iValue) {
+        $admin_links .= '<td class="even" style="width: 20%; text-align: center;"><a href="' . $iValue[0] . '" accesskey="' . ($i + 1) . '">' . $iValue[1] . '</a></td>';
     }
     $admin_links .= "</tr></table><br clear='all'>\n";
     xoops_cp_header();
