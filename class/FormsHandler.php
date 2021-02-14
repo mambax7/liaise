@@ -46,6 +46,10 @@ if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * Class FormsHandler
+ * @package XoopsModules\Liaise
+ */
 class FormsHandler extends XoopsObjectHandler
 {
     public $db;
@@ -59,6 +63,10 @@ class FormsHandler extends XoopsObjectHandler
         $this->db_table = $this->db->prefix('xliaise_forms');
     }
 
+    /**
+     * @param $db
+     * @return \XoopsModules\Liaise\FormsHandler
+     */
     public function getInstance($db)
     {
         static $instance;
@@ -69,6 +77,9 @@ class FormsHandler extends XoopsObjectHandler
         return $instance;
     }
 
+    /**
+     * @return mixed
+     */
     public function &create()
     {
         $ret = new $this->obj_class();
@@ -76,6 +87,11 @@ class FormsHandler extends XoopsObjectHandler
         return $ret;
     }
 
+    /**
+     * @param int    $id
+     * @param string $fields
+     * @return false|mixed
+     */
     public function get($id, $fields = '*')
     {
         $id = (int)$id;
@@ -98,6 +114,11 @@ class FormsHandler extends XoopsObjectHandler
         return false;
     }
 
+    /**
+     * @param \XoopsObject $form
+     * @param false        $force
+     * @return bool|void
+     */
     public function insert(XoopsObject $form, $force = false)
     {
         if (mb_strtolower(get_class($form)) != mb_strtolower($this->obj_class)) {
@@ -176,6 +197,11 @@ class FormsHandler extends XoopsObjectHandler
         return $form_id;
     }
 
+    /**
+     * @param \XoopsObject $form
+     * @param false        $force
+     * @return bool
+     */
     public function delete(XoopsObject $form, $force = false)
     {
         if (mb_strtolower(get_class($form)) != mb_strtolower($this->obj_class)) {
@@ -191,6 +217,12 @@ class FormsHandler extends XoopsObjectHandler
         return true;
     }
 
+    /**
+     * @param null   $criteria
+     * @param string $fields
+     * @param false  $id_as_key
+     * @return false
+     */
     public function getObjects($criteria = null, $fields = '*', $id_as_key = false)
     {
         $ret   = false;
@@ -230,6 +262,10 @@ class FormsHandler extends XoopsObjectHandler
         return $ret;
     }
 
+    /**
+     * @param null $criteria
+     * @return int|mixed
+     */
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db_table;
@@ -245,6 +281,10 @@ class FormsHandler extends XoopsObjectHandler
         return $count;
     }
 
+    /**
+     * @param null $criteria
+     * @return bool
+     */
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db_table;
@@ -258,6 +298,10 @@ class FormsHandler extends XoopsObjectHandler
         return true;
     }
 
+    /**
+     * @param $form_id
+     * @return bool
+     */
     public function deleteFormPermissions($form_id)
     {
         $GLOBALS['grouppermHandler']->deleteByModule($GLOBALS['xoopsModule']->getVar('mid'), $this->perm_name, $form_id);
@@ -265,6 +309,11 @@ class FormsHandler extends XoopsObjectHandler
         return true;
     }
 
+    /**
+     * @param $form_id
+     * @param $group_ids
+     * @return bool
+     */
     public function insertFormPermissions($form_id, $group_ids)
     {
         foreach ($group_ids as $id) {
@@ -274,6 +323,9 @@ class FormsHandler extends XoopsObjectHandler
         return true;
     }
 
+    /**
+     * @return array|false
+     */
     public function getPermittedForms()
     {
         global $xoopsUser, $xoopsModule;
@@ -300,6 +352,10 @@ class FormsHandler extends XoopsObjectHandler
         return false;
     }
 
+    /**
+     * @param $form_id
+     * @return bool
+     */
     public function getSingleFormPermission($form_id)
     {
         global $xoopsUser, $xoopsModule;

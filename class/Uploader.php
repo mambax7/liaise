@@ -133,6 +133,9 @@ class Uploader
         }
     }
 
+    /**
+     * @param $value
+     */
     public function noAdminSizeCheck($value)
     {
         $this->noadmin_sizecheck = $value;
