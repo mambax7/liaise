@@ -39,7 +39,6 @@ if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
-/** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 
 $defaults               = [];

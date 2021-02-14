@@ -41,15 +41,27 @@ namespace XoopsModules\Liaise;
 
 use XoopsModules\Liaise;
 
+/**
+ * Class ElementRenderer
+ * @package XoopsModules\Liaise
+ */
 class ElementRenderer
 {
     private $_ele;
 
+    /**
+     * ElementRenderer constructor.
+     * @param $element
+     */
     public function __construct(&$element)
     {
         $this->_ele = &$element;
     }
 
+    /**
+     * @param false $admin
+     * @return false|\XoopsFormDhtmlTextArea|\XoopsFormElementTray|\XoopsFormFile|\XoopsFormLabel|\XoopsFormRadio|\XoopsFormSelect|\XoopsFormText|\XoopsFormTextArea
+     */
     public function &constructElement($admin = false)
     {
         global $xoopsUser, $form;
@@ -302,9 +314,13 @@ class ElementRenderer
         return $form_ele;
     }
 
+    /**
+     * @param $s
+     * @param $id
+     * @return false|string
+     */
     public function optOther($s, $id)
     {
-        /** @var Liaise\Helper $helper */
         $helper = Liaise\Helper::getInstance();
         if (!\preg_match('/\{OTHER\|+[0-9]+\}/', $s)) {
             return false;

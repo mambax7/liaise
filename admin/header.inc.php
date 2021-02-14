@@ -12,6 +12,11 @@
 /*            <https://xoops.org>          */
 /* ******************************************* */
 
+/**
+ * @param false $form_order
+ * @param bool  $created
+ * @return false|int
+ */
 function getFormsCount($form_order = false, $created = true)
 {
     // query database for forms created
@@ -43,6 +48,10 @@ function getFormsCount($form_order = false, $created = true)
     return $num_forms;
 }
 
+/**
+ * @param $form_id
+ * @return array|false
+ */
 function getFormTitle($form_id)
 {
     // query database for form title

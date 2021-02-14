@@ -34,10 +34,8 @@ function xoops_module_uninstall_liaise(\XoopsModule $module)
 
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    /** @var Liaise\Helper $helper */
     $helper = Liaise\Helper::getInstance();
 
-    /** @var Liaise\Utility $utility */
     $utility = new Liaise\Utility();
 
     $success = true;

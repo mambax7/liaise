@@ -33,6 +33,10 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
+/**
+ * @param \XoopsModule $module
+ * @return bool
+ */
 function xoops_module_install_liaise(\XoopsModule $module)
 {
     /** @var \XoopsGroupPermHandler $grouppermHandler */

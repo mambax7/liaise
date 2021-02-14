@@ -41,6 +41,10 @@ if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * Class Forms
+ * @package XoopsModules\Liaise
+ */
 class Forms extends \XoopsObject
 {
     public function __construct()

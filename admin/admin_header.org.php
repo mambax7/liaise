@@ -43,7 +43,6 @@ function adminHtmlHeader()
 {
     global $xoopsModule, $xoopsConfig;
 
-    /** @var Liaise\Helper $helper */
     $helper = Liaise\Helper::getInstance();
     $helper->loadLanguage('modinfo');
 

@@ -41,7 +41,6 @@ $liaise_ele_mgr = $helper->getHandler('Elements');
 //require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
 define('_THIS_PAGE', LIAISE_URL . 'admin/editelement.php');
 
-/** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 $myts   = \MyTextSanitizer::getInstance();
 if ($formsHandler->getCount() < 1) {
@@ -314,6 +313,14 @@ switch ($op) {
 require_once __DIR__ . '/footer.php';
 xoops_cp_footer();
 
+/**
+ * @param        $id1
+ * @param        $id2
+ * @param string $text
+ * @param string $type
+ * @param null   $checked
+ * @return \XoopsFormElementTray
+ */
 function addOption($id1, $id2, $text = '', $type = 'check', $checked = null)
 {
     $d = new \XoopsFormText('', $id1, 40, 255, $text);
@@ -331,6 +338,9 @@ function addOption($id1, $id2, $text = '', $type = 'check', $checked = null)
     return $t;
 }
 
+/**
+ * @return \XoopsFormElementTray
+ */
 function addOptionsTray()
 {
     $t = new \XoopsFormText('', 'addopt', 3, 2);

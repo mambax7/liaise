@@ -40,7 +40,6 @@ if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
-/** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 
 $liaise_ele_mgr = $helper->getHandler('Elements');
@@ -324,6 +323,12 @@ $whereto = $form->getVar('form_whereto');
 $whereto = !empty($whereto) ? str_replace('{SITE_URL}', XOOPS_URL, $whereto) : XOOPS_URL . '/index.php';
 redirect_header($whereto, 0, _LIAISE_MSG_SENT);
 
+/**
+ * @param $key
+ * @param $id
+ * @param $caption
+ * @return false|string
+ */
 function checkOther($key, $id, $caption)
 {
     global $err, $myts;

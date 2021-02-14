@@ -46,7 +46,6 @@ define('_LIAISE_ADMIN_URL', LIAISE_URL . 'admin/');
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/header.inc.php';
 
-/** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 $helper->loadLanguage('modinfo');
 
@@ -64,6 +63,9 @@ $myts = \MyTextSanitizer::getInstance();
 //require_once LIAISE_ROOT_PATH . 'include/gtickets.php';
 // ------
 
+/**
+ * @param string $navigation
+ */
 function adminHtmlHeader($navigation = 'index.php')
 {
     xoops_cp_header();
@@ -143,7 +145,6 @@ function adminHtmlHeaderPopup()
 {
     global $xoopsModule, $xoopsConfig;
 
-    /** @var Liaise\Helper $helper */
     $helper = Liaise\Helper::getInstance();
     $helper->loadLanguage('modinfo');
 }
@@ -170,6 +171,10 @@ function adminHtmlFooter()
          . "'>INFORMATUX</a></div></div>";
 } // fin de la fonction
 
+/**
+ * @param $date
+ * @return false|string
+ */
 function formatDate($date)
 {
     if ($date) {
@@ -179,6 +184,13 @@ function formatDate($date)
     return $returndate;
 }
 
+/**
+ * @param        $string
+ * @param int    $max_length
+ * @param string $replacement
+ * @param false  $trunc_at_space
+ * @return string|string[]
+ */
 function truncate($string, $max_length = 30, $replacement = '', $trunc_at_space = false)
 {
     $max_length    -= mb_strlen($replacement);
@@ -195,6 +207,10 @@ function truncate($string, $max_length = 30, $replacement = '', $trunc_at_space 
     return substr_replace($string, $replacement, $max_length);
 }
 
+/**
+ * @param $form_id
+ * @return false|int
+ */
 function getMessagesCount($form_id)
 {
     // query database for posted messages
@@ -212,6 +228,10 @@ function getMessagesCount($form_id)
     return $num_messages;
 }
 
+/**
+ * @param $ele
+ * @return false|string
+ */
 function getElementName($ele)
 {
     if (!isset($ele)) {

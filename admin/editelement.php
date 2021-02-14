@@ -41,7 +41,6 @@ use XoopsModules\Liaise;
 // Includes
 require_once __DIR__ . '/admin_header.php';
 
-/** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 
 $liaise_ele_mgr = $helper->getHandler('Elements');
@@ -387,6 +386,14 @@ switch ($op) {
 require_once __DIR__ . '/footer.php';
 xoops_cp_footer();
 
+/**
+ * @param        $id1
+ * @param        $id2
+ * @param string $text
+ * @param string $type
+ * @param null   $checked
+ * @return \XoopsFormElementTray
+ */
 function addOption($id1, $id2, $text = '', $type = 'check', $checked = null)
 {
     $d = new \XoopsFormText('', $id1, 40, 255, $text);
@@ -404,6 +411,9 @@ function addOption($id1, $id2, $text = '', $type = 'check', $checked = null)
     return $t;
 }
 
+/**
+ * @return \XoopsFormElementTray
+ */
 function addOptionsTray()
 {
     $t = new \XoopsFormText('', 'addopt', 3, 2);

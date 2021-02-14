@@ -39,7 +39,6 @@ if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
-/** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 
 $size    = !empty($value[0]) ? (int)$value[0] : $helper->getConfig('t_width');

@@ -42,6 +42,10 @@ if (!\defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * Class Elements
+ * @package XoopsModules\Liaise
+ */
 class Elements extends \XoopsObject
 {
     public function __construct()

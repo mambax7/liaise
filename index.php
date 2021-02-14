@@ -41,7 +41,6 @@ use XoopsModules\Liaise;
 
 require_once __DIR__ . '/header.php';
 
-/** @var Liaise\Helper $helper */
 $helper = Liaise\Helper::getInstance();
 $myts   = \MyTextSanitizer::getInstance();
 

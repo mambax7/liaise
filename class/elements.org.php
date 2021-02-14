@@ -39,6 +39,9 @@ if (!\defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * Class Elements
+ */
 class Elements extends \XoopsObject
 {
     public function __construct()
@@ -56,6 +59,9 @@ class Elements extends \XoopsObject
     }
 }
 
+/**
+ * Class ElementsHandler
+ */
 class ElementsHandler
 {
     private $db;
@@ -68,6 +74,10 @@ class ElementsHandler
         $this->db_table = $this->db->prefix('liaise_formelements');
     }
 
+    /**
+     * @param $db
+     * @return \ElementsHandler
+     */
     public function getInstance($db)
     {
         static $instance;
@@ -78,6 +88,9 @@ class ElementsHandler
         return $instance;
     }
 
+    /**
+     * @return mixed
+     */
     public function &create()
     {
         $ret = new $this->obj_class();
@@ -85,6 +98,10 @@ class ElementsHandler
         return $ret;
     }
 
+    /**
+     * @param $id
+     * @return false|mixed
+     */
     public function get($id)
     {
         $id = (int)$id;
@@ -105,6 +122,11 @@ class ElementsHandler
         return false;
     }
 
+    /**
+     * @param \XoopsObject $element
+     * @param false        $force
+     * @return bool
+     */
     public function insert(\XoopsObject $element, $force = false)
     {
         if (mb_strtolower(\get_class($element)) != mb_strtolower($this->obj_class)) {
@@ -177,6 +199,11 @@ class ElementsHandler
         return $ele_id;
     }
 
+    /**
+     * @param       $element
+     * @param false $force
+     * @return bool
+     */
     public function delete($element, $force = false)
     {
         if (mb_strtolower(\get_class($element)) != mb_strtolower($this->obj_class)) {
@@ -192,6 +219,11 @@ class ElementsHandler
         return true;
     }
 
+    /**
+     * @param null  $criteria
+     * @param false $id_as_key
+     * @return array|false
+     */
     public function getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
@@ -223,6 +255,10 @@ class ElementsHandler
         return \count($ret) > 0 ? $ret : false;
     }
 
+    /**
+     * @param null $criteria
+     * @return int|mixed
+     */
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db_table;
@@ -238,6 +274,10 @@ class ElementsHandler
         return $count;
     }
 
+    /**
+     * @param null $criteria
+     * @return bool
+     */
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db_table;
@@ -251,6 +291,10 @@ class ElementsHandler
         return true;
     }
 
+    /**
+     * @param $form_id
+     * @return false|string
+     */
     public function insertDefaults($form_id)
     {
         global $xoopsModuleConfig;

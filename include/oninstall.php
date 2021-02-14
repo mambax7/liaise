@@ -31,7 +31,6 @@ use XoopsModules\Liaise\Utility;
 function xoops_module_pre_install_liaise(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Liaise\Utility $utility */
     $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -58,7 +57,6 @@ function xoops_module_install_liaise(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var Liaise\Helper $helper */
     $helper       = Liaise\Helper::getInstance();
     $utility      = new Utility();
     $configurator = new Liaise\Common\Configurator();

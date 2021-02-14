@@ -37,7 +37,6 @@ use XoopsModules\Liaise\{
     Helper
 };
 
-/** @var Helper $helper */
 $helper = Helper::getInstance();
 $dirname = $helper->getDirname();
 
@@ -63,6 +62,10 @@ if (false !== LIAISE_UPLOAD_PATH) {
 }
 
 // ------------------ INFORMATUX
+/**
+ * @param $result
+ * @return array
+ */
 function dbResultToArray($result)
 {
     // construction d'un tableau pour les scripts
