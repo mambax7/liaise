@@ -38,6 +38,7 @@
 
 use Xmf\Request;
 use XoopsModules\Liaise;
+use XoopsModules\Liaise\Captcha\Captchax;
 
 require_once __DIR__ . '/header.php';
 
@@ -115,7 +116,7 @@ if (empty($_POST['submit'])) {
     // ---------- captcha ---------
     if ($helper->getConfig('captcha') && empty($liaise_error)) {
         //        require_once LIAISE_ROOT_PATH . 'class/captcha_x/class.captcha_x.php';
-        $captcha = new captcha_x();
+        $captcha = new Captchax();
         if (!isset($_POST['captcha']) || !$captcha->validate($_POST['captcha'])) {
             $liaise_error = _LIAISE_CAPTCHA_ERROR;
         }

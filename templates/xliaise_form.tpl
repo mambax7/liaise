@@ -1,6 +1,6 @@
 <{include file='db:xliaise_header.tpl'}>
 
-<{if $forms_breadcrumb}>
+<{if $forms_breadcrumb|default:''}>
     <div class="breadcrumbs">
         <a href="<{$xoops_url}>"><{$smarty.const._LIAISE_HOMEPAGE}></a>
         <{$smarty.const._LIAISE_BRDCRMB_SEP}>
@@ -18,10 +18,10 @@
     <h2><{$form_output.title}></h2>
 
     <{* ticket and captcha error *}>
-    <{if $form_error != ""}>
+    <{if $form_error|default:'' != ""}>
         <div class="errorMsg"><{$form_error}></div>
     <{/if}>
-    <{if $form_is_hidden != ""}><p><{$form_is_hidden}></p><{/if}>
+    <{if $form_is_hidden|default:'' != ""}><p><{$form_is_hidden}></p><{/if}>
 
     <{if $form_intro != ""}><p><{$form_intro|@html_entity_decode}></p><{/if}>
     <div class="clear"></div>

@@ -37,7 +37,7 @@ use Xmf\Request;
 use XoopsModules\Liaise;
 
 require_once __DIR__ . '/admin_header.php';
-$liaise_ele_mgr = $helper->getHandler('Elements');
+$elementsHandler = $helper->getHandler('Elements');
 //require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
 define('_THIS_PAGE', LIAISE_URL . 'admin/editelement.php');
 
@@ -68,11 +68,11 @@ switch ($op) {
     case 'edit':
         adminHtmlHeader();
         if (!empty($ele_id)) {
-            $element      = $liaise_ele_mgr->get($ele_id);
+            $element      = $elementsHandler->get($ele_id);
             $ele_type     = $element->getVar('ele_type');
             $output_title = $clone ? _AM_ELE_CREATE : sprintf(_AM_ELE_EDIT, $element->getVar('ele_caption'));
         } else {
-            $element      = $liaise_ele_mgr->create();
+            $element      = $elementsHandler->create();
             $output_title = _AM_ELE_CREATE;
         }
         $output = new \XoopsThemeForm($output_title, 'form_ele', _THIS_PAGE);
@@ -175,16 +175,16 @@ switch ($op) {
             adminHtmlHeader();
             xoops_confirm(['op' => 'delete', 'ele_id' => $ele_id, 'form_id' => $form_id, 'ok' => 1], _THIS_PAGE, _AM_ELE_CONFIRM_DELETE);
         } else {
-            $element = $liaise_ele_mgr->get($ele_id);
-            $liaise_ele_mgr->delete($element);
+            $element = $elementsHandler->get($ele_id);
+            $elementsHandler->delete($element);
             redirect_header(LIAISE_URL . 'admin/elements.php?form_id=' . $form_id, 0, _AM_DBUPDATED);
         }
         break;
     case 'save':
         if (!empty($ele_id)) {
-            $element = $liaise_ele_mgr->get($ele_id);
+            $element = $elementsHandler->get($ele_id);
         } else {
-            $element = $liaise_ele_mgr->create();
+            $element = $elementsHandler->create();
         }
         $element->setVar('form_id', $form_id);
         $element->setVar('ele_caption', $ele_caption);
@@ -287,7 +287,7 @@ switch ($op) {
                 break;
         }
         $element->setVar('ele_value', $value);
-        if (!$liaise_ele_mgr->insert($element)) {
+        if (!$elementsHandler->insert($element)) {
             adminHtmlHeader();
             echo $element->getHtmlErrors();
         } else {

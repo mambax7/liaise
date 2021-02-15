@@ -45,5 +45,7 @@ $op = isset($_POST['op']) ? trim($_POST['op']) : $op;
 
 adminHtmlHeader();
 
+echo $utility::getServerStats();
+
 require_once __DIR__ . '/footer.php';
 xoops_cp_footer();

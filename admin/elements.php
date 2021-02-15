@@ -41,7 +41,7 @@ use XoopsModules\Liaise;
 // Includes
 require_once __DIR__ . '/admin_header.php';
 
-$liaise_ele_mgr = $helper->getHandler('Elements');
+$elementsHandler = $helper->getHandler('Elements');
 
 //require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
 
@@ -103,7 +103,7 @@ if (!isset($_POST['op']) || 'save' !== $_POST['op']) {
     $ticket = $GLOBALS['xoopsSecurity']->createToken();
     // ------
 
-    $elements = $liaise_ele_mgr->getObjects($criteria);
+    $elements = $elementsHandler->getObjects($criteria);
     if ($elements) {
         foreach ($elements as $i) {
             $id        = $i->getVar('ele_id');
@@ -181,7 +181,7 @@ if (!isset($_POST['op']) || 'save' !== $_POST['op']) {
     extract($_POST, EXTR_OVERWRITE);
     $error = '';
     foreach ($ele_id as $id) {
-        $element = $liaise_ele_mgr->get($id);
+        $element = $elementsHandler->get($id);
         $req     = !empty($ele_req[$id]) ? 1 : 0;
         $element->setVar('ele_req', $req);
         $order = !empty($ele_order[$id]) ? (int)$ele_order[$id] : 0;
@@ -300,7 +300,7 @@ if (!isset($_POST['op']) || 'save' !== $_POST['op']) {
                 break;
         }
         $element->setVar('ele_value', $value, true);
-        if (!$liaise_ele_mgr->insert($element)) {
+        if (!$elementsHandler->insert($element)) {
             $error .= $element->getHtmlErrors();
         }
     }

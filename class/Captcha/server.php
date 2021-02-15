@@ -4,7 +4,7 @@
  * CAPTCHA image server
  */
 
-use XoopsModules\Liaise\Captchax;
+use XoopsModules\Liaise\Captcha\Captchax;
 
 //require_once __DIR__ . '/class.captcha_x.php';
 $server = new Captchax();

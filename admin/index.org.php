@@ -186,9 +186,9 @@ switch ($op) {
             }
             $form = $formsHandler->get($form_id);
             $formsHandler->delete($form);
-            $liaise_ele_mgr = $helper->getHandler('Elements');
+            $elementsHandler = $helper->getHandler('Elements');
             $criteria       = new \Criteria('form_id', $form_id);
-            $liaise_ele_mgr->deleteAll($criteria);
+            $elementsHandler->deleteAll($criteria);
             $formsHandler->deleteFormPermissions($form_id);
             redirect_header(LIAISE_ADMIN_URL, 0, _AM_DBUPDATED);
         }
@@ -233,22 +233,22 @@ switch ($op) {
                 $formsHandler->insertFormPermissions($ret, $form_group_perm);
             }
             if (!empty($clone_form_id)) {
-                $liaise_ele_mgr = $helper->getHandler('Elements');
+                $elementsHandler = $helper->getHandler('Elements');
                 $criteria       = new \Criteria('form_id', $clone_form_id);
-                $count          = $liaise_ele_mgr->getCount($criteria);
+                $count          = $elementsHandler->getCount($criteria);
                 if ($count > 0) {
-                    $elements = $liaise_ele_mgr->getObjects($criteria);
+                    $elements = $elementsHandler->getObjects($criteria);
                     foreach ($elements as $e) {
                         $cloned = &$e->xoopsClone();
                         $cloned->setVar('form_id', $ret);
-                        if (!$liaise_ele_mgr->insert($cloned)) {
+                        if (!$elementsHandler->insert($cloned)) {
                             $error .= $cloned->getHtmlErrors();
                         }
                     }
                 }
             } elseif (empty($form_id)) {
-                $liaise_ele_mgr = $helper->getHandler('Elements');
-                $error          = $liaise_ele_mgr->insertDefaults($ret);
+                $elementsHandler = $helper->getHandler('Elements');
+                $error          = $elementsHandler->insertDefaults($ret);
             }
         }
         if (!empty($error)) {

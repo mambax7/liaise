@@ -43,7 +43,7 @@ require_once __DIR__ . '/admin_header.php';
 
 $helper = Liaise\Helper::getInstance();
 
-$liaise_ele_mgr = $helper->getHandler('Elements');
+$elementsHandler = $helper->getHandler('Elements');
 
 //if (is_file(LIAISE_ROOT_PATH . 'class/elementrenderer.php')) {
 //    require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
@@ -77,11 +77,11 @@ switch ($op) {
     case 'edit':
         adminHtmlHeader('editelement.php');
         if (!empty($ele_id)) {
-            $element      = $liaise_ele_mgr->get($ele_id);
+            $element      = $elementsHandler->get($ele_id);
             $ele_type     = $element->getVar('ele_type');
             $output_title = $clone ? _AM_ELE_CREATE : sprintf(_AM_ELE_EDIT, $element->getVar('ele_caption'));
         } else {
-            $element = $liaise_ele_mgr->create();
+            $element = $elementsHandler->create();
             // Check if form_id > 0
             if ($form_id > 0) {
                 global $xoopsDB;
@@ -235,8 +235,8 @@ switch ($op) {
             }
             // ------
 
-            $element = $liaise_ele_mgr->get($ele_id);
-            $liaise_ele_mgr->delete($element);
+            $element = $elementsHandler->get($ele_id);
+            $elementsHandler->delete($element);
             redirect_header(_LIAISE_ADMIN_URL . 'elements.php?form_id=' . $form_id, 0, _AM_DBUPDATED);
         }
         break;
@@ -250,9 +250,9 @@ switch ($op) {
         // ------
 
         if (!empty($ele_id)) {
-            $element = $liaise_ele_mgr->get($ele_id);
+            $element = $elementsHandler->get($ele_id);
         } else {
-            $element = $liaise_ele_mgr->create();
+            $element = $elementsHandler->create();
         }
         $element->setVar('form_id', $form_id);
         $element->setVar('ele_caption', $ele_caption);
@@ -358,7 +358,7 @@ switch ($op) {
                 break;
         }
         $element->setVar('ele_value', $value);
-        if (!$liaise_ele_mgr->insert($element)) {
+        if (!$elementsHandler->insert($element)) {
             adminHtmlHeader('editelement.php');
             echo $element->getHtmlErrors();
         } else {

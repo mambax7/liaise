@@ -1,6 +1,6 @@
 <?php
 
-use XoopsModules\Liaise\Captchax;
+use XoopsModules\Liaise\Captcha\Captchax;
 
 session_start();
 

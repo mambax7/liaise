@@ -33,14 +33,21 @@
 ##  Project: Liaise                                                          ##
 ###############################################################################
 
-use XoopsModules\Liaise;
+use XoopsModules\Liaise\{
+    Helper,
+    ElementRenderer,
+    ElementsHandler
+};
 
 if (!defined('LIAISE_ROOT_PATH')) {
     exit();
 }
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-$liaise_ele_mgr = $helper->getHandler('Elements');
+
+$helper = Helper::getInstance();
+/** @var ElementsHandler $elementsHandler */
+$elementsHandler = $helper->getHandler('Elements');
 //require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
 $GLOBALS['xoopsOption']['template_main'] = 'liaise_form.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
@@ -49,13 +56,11 @@ $criteria->add(new \Criteria('form_id', $form->getVar('form_id')));
 $criteria->add(new \Criteria('ele_display', 1));
 $criteria->setSort('ele_order');
 $criteria->setOrder('ASC');
-$elements = $liaise_ele_mgr->getObjects($criteria, true);
-
-$helper = Liaise\Helper::getInstance();
+$elements = $elementsHandler->getObjects($criteria, true);
 
 $form_output = new \XoopsThemeForm($form->getVar('form_title'), 'liaise_' . $form->getVar('form_id'), LIAISE_URL . 'index.php');
 foreach ($elements as $i) {
-    $renderer = new Liaise\ElementRenderer($i);
+    $renderer = new ElementRenderer($i);
     $form_ele = &$renderer->constructElement();
     $req      = (int)$i->getVar('ele_req');
     $form_output->addElement($form_ele, $req);

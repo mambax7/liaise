@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Liaise\Captchax;
+namespace XoopsModules\Liaise\Captcha;
 
 // 2006-12-20 K.OHWADA
 // session start in other process

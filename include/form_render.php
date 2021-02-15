@@ -48,7 +48,7 @@ if (!defined('LIAISE_ROOT_PATH')) {
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 $helper = Helper::getInstance();
-$liaise_ele_mgr = $helper->getHandler('Elements');
+$elementsHandler = $helper->getHandler('Elements');
 //require_once LIAISE_ROOT_PATH . 'class/elementrenderer.php';
 
 // -------------------------------------------------------
@@ -60,7 +60,7 @@ $criteria->add(new \Criteria('form_id', $form->getVar('form_id')));
 $criteria->add(new \Criteria('ele_display', 1));
 $criteria->setSort('ele_order');
 $criteria->setOrder('ASC');
-$elements = $liaise_ele_mgr->getObjects($criteria, true);
+$elements = $elementsHandler->getObjects($criteria, true);
 
 $form_output = new \XoopsThemeForm($form->getVar('form_title'), 'liaise_' . $form->getVar('form_id'), LIAISE_URL . 'index.php');
 foreach ($elements as $i) {

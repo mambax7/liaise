@@ -36,6 +36,9 @@
 use XoopsModules\Liaise\{
     Helper
 };
+/** @var Helper $helper */
+
+include dirname(__DIR__) . '/preloads/autoloader.php';
 
 $helper = Helper::getInstance();
 $dirname = $helper->getDirname();

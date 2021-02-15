@@ -42,13 +42,13 @@ if (!defined('LIAISE_ROOT_PATH')) {
 
 $helper = Liaise\Helper::getInstance();
 
-$liaise_ele_mgr = $helper->getHandler('Elements');
+$elementsHandler = $helper->getHandler('Elements');
 $criteria       = new \CriteriaCompo();
 $criteria->add(new \Criteria('form_id', $form->getVar('form_id')), 'AND');
 $criteria->add(new \Criteria('ele_display', 1), 'AND');
 $criteria->setSort('ele_order');
 $criteria->setOrder('ASC');
-$elements = $liaise_ele_mgr->getObjects($criteria, true);
+$elements = $elementsHandler->getObjects($criteria, true);
 
 $msg = $err = $attachments = [];
 foreach ($_POST as $k => $v) {

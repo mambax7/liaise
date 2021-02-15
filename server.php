@@ -5,7 +5,8 @@
 // 2006-12-20 K.OHWADA
 //================================================================
 
+use XoopsModules\Liaise\Captcha\Captchax;
+
 require_once dirname(__DIR__, 2) . '/mainfile.php';
-require_once __DIR__ . '/class/captcha_x/class.captcha_x.php';
-$server = new captcha_x();
+$server = new Captchax();
 $server->handle_request();

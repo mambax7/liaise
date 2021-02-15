@@ -36,7 +36,10 @@
 ###############################################################################
 
 use Xmf\Module\Admin;
-use XoopsModules\Liaise;
+use XoopsModules\Liaise\{
+    Helper,
+    Utility
+};
 
 // includes
 require_once dirname(__DIR__, 3) . '/include/cp_header.php';
@@ -46,8 +49,9 @@ define('_LIAISE_ADMIN_URL', LIAISE_URL . 'admin/');
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/header.inc.php';
 
-$helper = Liaise\Helper::getInstance();
+$helper = Helper::getInstance();
 $helper->loadLanguage('modinfo');
+$utility = new Utility();
 
 /** @var \XoopsModuleHandler $moduleHandler */
 $moduleHandler   = xoops_getHandler('module');
